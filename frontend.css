@@ -1,20 +1,20 @@
 @font-face {
-  font-family: "Open Sans";
-  src: url("./fonts/Neuton-regular.ttf") format("truetype");
+  font-family: "Neuton";
+  src: url("../Neuton/Neuton-regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  src: url("./fonts/Neuton-bold.ttf") format("truetype");
+  font-family: "Neuton";
+  src: url("../Neuton/Neuton-bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  src: url("./fonts/Neuton-italic.ttf") format("truetype");
+  font-family: "Neuton";
+  src: url("../Neuton/Neuton-italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
@@ -22,12 +22,15 @@
 /* Fonts and global styles */
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Neuton", sans-serif;
 }
 
 .container {
-  display: flex;
   height: 100vh;
+}
+
+.slide {
+  display: flex;
 }
 
 /* Left image panel */
@@ -39,14 +42,22 @@ body {
   background-color: #c7ef4e; /* Light green background */
 }
 
+.grid-img {
+  position: relative;
+  width: 100%;
+  max-height: 100vh;
+  object-fit: cover; /* Ensures image fills without stretching */
+  display: block;
+}
+
 /* Right form panel */
 .right-panel {
   flex: 1;
   background-color: #ffffff; /* White background */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
   box-sizing: border-box;
 }
 
@@ -59,8 +70,8 @@ h1 {
   font-weight: 700;
   line-height: 100%; /* 60px */
   letter-spacing: -1.32px;
-  margin-bottom: 65px;
-  margin-top: 107px;
+  margin-bottom: 48px;
+  margin-top: 42px;
 }
 
 form {
@@ -72,28 +83,28 @@ form {
 label {
   color: #085420;
   font-family: Neuton;
-  font-size: 40px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 40px */
   letter-spacing: -0.88px;
   opacity: 0.7;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 input.last-input {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 input {
-  margin-bottom: 46px;
+  margin-bottom: 42px;
   padding: 15px;
   font-size: 1em;
   border: 2px solid #ede8d8; /* Beige border */
   border-radius: 10px;
   background-color: #ffffff;
   color: #333;
-  padding: 24px 287px 24px 26px;
+  padding: 16px 287px 16px 26px;
   align-items: center;
   flex-shrink: 0;
 }
@@ -101,7 +112,7 @@ input {
 input::placeholder {
   color: #085420;
   font-family: "Open Sans";
-  font-size: 25px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 25px */
@@ -129,10 +140,10 @@ button:hover {
 }
 
 .login-link {
-  margin-top: 25px;
+  margin-top: 10px;
   color: #085420;
   font-family: "Open Sans";
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 20px */
@@ -144,7 +155,7 @@ button:hover {
 .login-link a {
   color: #085420;
   font-family: "Open Sans";
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
@@ -157,4 +168,11 @@ button:hover {
   text-underline-offset: 3px;
   text-decoration-style: solid;
   text-decoration-skip-ink: none;
+}
+
+/********************/
+/* For JS */
+/********************/
+.hidden {
+  display: none;
 }
