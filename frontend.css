@@ -1,1 +1,13 @@
+.container {
+  max-width: 1200px; /* Limits width on large screens */
+  margin: 80px auto; /* Centers the container */
+  padding: 2rem; /* Adds space inside the container */
+  background-color: #f9f9f9; /* Light background */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
