@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="frontend.css" />
-  </head>
-  <body>
-    <script src="frontend.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="frontend.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel"></div>
+    <div class="right-panel">
+      <h1>Create account</h1>
+      <form>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email address" />
 
-    <div class="container">
-      <section class="main-section">
-        <div class="main-blocks grid-2">
-          <div class="half-grid-img">
-            <img src="my-image.jpg" alt="Description" />
-          </div>
-          <div class="half-grid-text">
-            <h2>Kald det kærlighed</h2>
-            <p>
-              Kald det lige, hvad du vil. <br />
-              ååååuuuååååh, der findes ingen ord <br />
-              ingen ord der helt slår til. <br />
-              så kald det lige hvad du vil.
-            </p>
-          </div>
-        </div>
-      </section>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create your password" />
+
+        <button type="submit">Create account</button>
+      </form>
+      <p class="login-link">Already have an account? <a href="#">Login</a></p>
     </div>
-  </body>
+  </div>
+</body>
 </html>
