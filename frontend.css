@@ -1,13 +1,88 @@
-.container {
-  max-width: 1200px; /* Limits width on large screens */
-  margin: 80px auto; /* Centers the container */
-  padding: 2rem; /* Adds space inside the container */
-  background-color: #f9f9f9; /* Light background */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+/* Fonts and global styles */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left image panel */
+.left-panel {
+  flex: 1;
+  background-image: url('pickle_repeat.jpg');
+  background-size: 100px;
+  background-repeat: repeat;
+  background-color: #C7EF4E; /* Light green background */
+}
+
+/* Right form panel */
+.right-panel {
+  flex: 1;
+  background-color: #FFFFFF; /* White background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Neuton', serif;
+  font-size: 2.5em;
+  color: #085420; /* Dark green */
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1em;
+  color: #085420;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+input {
+  padding: 15px;
+  font-size: 1em;
+  border: 2px solid #EDE8D8; /* Beige border */
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  color: #333;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #C7EF4E; /* Light green */
+  color: #085420; /* Dark green */
+  font-size: 1.1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #b9e537;
+}
+
+.login-link {
+  margin-top: 20px;
+  color: #085420;
+  font-size: 0.95em;
+}
+
+.login-link a {
+  color: #085420;
+  font-weight: bold;
+  text-decoration: none;
 }
