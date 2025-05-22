@@ -1,0 +1,366 @@
+/* Fonts and global styles */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left image panel */
+.left-panel {
+  flex: 1;
+  background-image: url('pickle_repeat.jpg');
+  background-size: 100px;
+  background-repeat: repeat;
+  background-color: #C7EF4E; /* Light green background */
+}
+
+/* Right form panel */
+.right-panel {
+  flex: 1;
+  background-color: #FFFFFF; /* White background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Neuton', serif;
+  font-size: 2.5em;
+  color: #085420; /* Dark green */
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1em;
+  color: #085420;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+input {
+  padding: 15px;
+  font-size: 1em;
+  border: 2px solid #EDE8D8; /* Beige border */
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  color: #333;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #C7EF4E; /* Light green */
+  color: #085420; /* Dark green */
+  font-size: 1.1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #b9e537;
+}
+
+.login-link {
+  margin-top: 20px;
+  color: #085420;
+  font-size: 0.95em;
+}
+
+.login-link a {
+  color: #085420;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+
+
+/* Starter screen layout */
+.start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.pickle-icon {
+  width: 80px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.start-card {
+  background-color: #085420; /* Dark green */
+  color: #C7EF4E; /* Light green text */
+  padding: 40px 60px;
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+.start-card h1 {
+  font-family: 'Neuton', serif;
+  color: #C7EF4E;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.start-card p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  color: #C7EF4E;
+  margin-bottom: 30px;
+}
+
+.play-button {
+  background-color: #C7EF4E; /* Light green */
+  color: #085420; /* Dark green */
+  font-family: 'Neuton', serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.play-button:hover {
+  background-color: #b9e537;
+}
+
+
+
+/* Game screen layout */
+.game-screen {
+  background-color: #085420; /* Dark green */
+  color: #C7EF4E;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-header {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.game-header h1 {
+  font-family: 'Neuton', serif;
+  font-size: 2.2em;
+  margin: 0;
+}
+
+.score {
+  font-family: 'Neuton', serif;
+  font-size: 1.2em;
+}
+
+/* Tweet card */
+.tweet-card {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tweet-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.tweet-user {
+  font-size: 1em;
+}
+
+.handle {
+  color: gray;
+  font-size: 0.9em;
+}
+
+.tweet-content {
+  font-size: 1.3em;
+  line-height: 1.4;
+}
+
+/* Buttons */
+.choice-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.choice-button {
+  padding: 15px 40px;
+  font-size: 1.1em;
+  font-family: 'Neuton', serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background-color: #C7EF4E;
+  color: #085420;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.choice-button:hover {
+  background-color: #b9e537;
+}
+:root {
+  --Pickle-1: #C7EF4E;
+  --Pickle-2: #085420;
+  --Beige: #EDE8D8;
+  --White: #FFFFFF;
+}
+
+.end-screen {
+  margin: 0;
+  background-color: #CBD2CB; /* soft greyish background */
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+.score-overlay {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: var(--Pickle-2);
+  font-family: 'Neuton', serif;
+  font-size: 1.2em;
+  opacity: 0.4;
+}
+
+.end-card {
+  background-color: var(--White);
+  border-radius: 20px;
+  text-align: center;
+  padding: 50px 80px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.end-card h2 {
+  font-family: 'Neuton', serif;
+  font-size: 3em;
+  color: var(--Pickle-2);
+  margin-bottom: 20px;
+}
+
+.stroke-heading {
+  color: var(--Pickle-2);
+  font-family: 'Neuton', serif;
+  font-size: 80px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -1.76px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--Pickle-1);
+  margin: 0 0 20px 0;
+}
+
+.small-text {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.final-score {
+  font-size: 1.4em;
+  font-family: 'Neuton', serif;
+  color: var(--Pickle-2);
+  margin-bottom: 30px;
+}
+
+.restart-button {
+  background-color: var(--Pickle-1);
+  color: var(--Pickle-2);
+  font-family: 'Neuton', serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart-button:hover {
+  background-color: #b9e537;
+}
+
+
+/* Feedback popup */
+.feedback-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  color: #085420;
+  font-family: 'Open Sans', sans-serif;
+  padding: 12px 20px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.feedback-popup.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.feedback-popup img {
+  width: 30px;
+  height: auto;
+}
+
+.feedback-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  line-height: 1.2;
+}
