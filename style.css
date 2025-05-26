@@ -1,7 +1,7 @@
 /* Fonts and global styles */
 body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .container {
@@ -12,16 +12,16 @@ body {
 /* Left image panel */
 .left-panel {
   flex: 1;
-  background-image: url('pickle_repeat.jpg');
+  background-image: url("pickle_repeat.jpg");
   background-size: 100px;
   background-repeat: repeat;
-  background-color: #C7EF4E; /* Light green background */
+  background-color: #c7ef4e; /* Light green background */
 }
 
 /* Right form panel */
 .right-panel {
   flex: 1;
-  background-color: #FFFFFF; /* White background */
+  background-color: #ffffff; /* White background */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,7 @@ body {
 }
 
 h1 {
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 2.5em;
   color: #085420; /* Dark green */
   margin-bottom: 30px;
@@ -51,19 +51,19 @@ label {
 input {
   padding: 15px;
   font-size: 1em;
-  border: 2px solid #EDE8D8; /* Beige border */
+  border: 2px solid #ede8d8; /* Beige border */
   border-radius: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #333;
 }
 
 button {
   margin-top: 30px;
   padding: 15px;
-  background-color: #C7EF4E; /* Light green */
+  background-color: #c7ef4e; /* Light green */
   color: #085420; /* Dark green */
   font-size: 1.1em;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: bold;
   border: none;
   border-radius: 999px;
@@ -87,9 +87,6 @@ button:hover {
   text-decoration: none;
 }
 
-
-
-
 /* Starter screen layout */
 .start-container {
   display: flex;
@@ -97,7 +94,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   text-align: center;
 }
 
@@ -109,30 +106,30 @@ button:hover {
 
 .start-card {
   background-color: #085420; /* Dark green */
-  color: #C7EF4E; /* Light green text */
+  color: #c7ef4e; /* Light green text */
   padding: 40px 60px;
   border-radius: 10px;
   max-width: 500px;
 }
 
 .start-card h1 {
-  font-family: 'Neuton', serif;
-  color: #C7EF4E;
+  font-family: "Neuton", serif;
+  color: #c7ef4e;
   font-size: 2.5em;
   margin-bottom: 20px;
 }
 
 .start-card p {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1em;
-  color: #C7EF4E;
+  color: #c7ef4e;
   margin-bottom: 30px;
 }
 
 .play-button {
-  background-color: #C7EF4E; /* Light green */
+  background-color: #c7ef4e; /* Light green */
   color: #085420; /* Dark green */
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-weight: bold;
   font-size: 1.2em;
   padding: 12px 32px;
@@ -146,13 +143,11 @@ button:hover {
   background-color: #b9e537;
 }
 
-
-
 /* Game screen layout */
 .game-screen {
   background-color: #085420; /* Dark green */
-  color: #C7EF4E;
-  font-family: 'Open Sans', sans-serif;
+  color: #c7ef4e;
+  font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 40px 20px;
   display: flex;
@@ -170,13 +165,13 @@ button:hover {
 }
 
 .game-header h1 {
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 2.2em;
   margin: 0;
 }
 
 .score {
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 1.2em;
 }
 
@@ -228,11 +223,11 @@ button:hover {
 .choice-button {
   padding: 15px 40px;
   font-size: 1.1em;
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-weight: bold;
   border: none;
   border-radius: 10px;
-  background-color: #C7EF4E;
+  background-color: #c7ef4e;
   color: #085420;
   cursor: pointer;
   transition: background 0.3s;
@@ -242,16 +237,16 @@ button:hover {
   background-color: #b9e537;
 }
 :root {
-  --Pickle-1: #C7EF4E;
+  --Pickle-1: #c7ef4e;
   --Pickle-2: #085420;
-  --Beige: #EDE8D8;
-  --White: #FFFFFF;
+  --Beige: #ede8d8;
+  --White: #ffffff;
 }
 
 .end-screen {
   margin: 0;
-  background-color: #CBD2CB; /* soft greyish background */
-  font-family: 'Open Sans', sans-serif;
+  background-color: #cbd2cb; /* soft greyish background */
+  font-family: "Open Sans", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,7 +259,7 @@ button:hover {
   top: 20px;
   right: 40px;
   color: var(--Pickle-2);
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 1.2em;
   opacity: 0.4;
 }
@@ -278,7 +273,7 @@ button:hover {
 }
 
 .end-card h2 {
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 3em;
   color: var(--Pickle-2);
   margin-bottom: 20px;
@@ -286,7 +281,7 @@ button:hover {
 
 .stroke-heading {
   color: var(--Pickle-2);
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 80px;
   font-weight: 400;
   line-height: 100%;
@@ -304,7 +299,7 @@ button:hover {
 
 .final-score {
   font-size: 1.4em;
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   color: var(--Pickle-2);
   margin-bottom: 30px;
 }
@@ -312,7 +307,7 @@ button:hover {
 .restart-button {
   background-color: var(--Pickle-1);
   color: var(--Pickle-2);
-  font-family: 'Neuton', serif;
+  font-family: "Neuton", serif;
   font-size: 1.2em;
   font-weight: bold;
   padding: 15px 40px;
@@ -326,7 +321,6 @@ button:hover {
   background-color: #b9e537;
 }
 
-
 /* Feedback popup */
 .feedback-popup {
   position: fixed;
@@ -334,7 +328,7 @@ button:hover {
   right: 20px;
   background-color: #ffffff;
   color: #085420;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 12px 20px;
   border-radius: 999px;
   display: flex;
