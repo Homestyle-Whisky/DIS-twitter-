@@ -63,3 +63,19 @@ print(get_tweet_attributes("1"))
     
 # user_signup("jonasg300@gmail.com", "madsmadpakke", "batman")
 
+
+
+## Generate the username for the tweet
+def tweet_username(tweet_id: str):
+    response = (supabase.table("tweet_data")
+                .select("name", "tweet", "is_real", "image_url")
+                .eq("Tweet_ID", tweet_id)
+                .execute()
+    )
+    tweet_username = response.data[0]["name"]
+    tweet_username = f'@{tweet_username.lower().replace(" ", "")}'
+    tweet_username = tweet_username.replace("'", "")
+
+    return tweet_username
+
+print(tweet_username("1"))
