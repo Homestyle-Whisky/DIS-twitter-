@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="frontend.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="container page">
       <div class="slide slide-1">
         <div class="left-panel">
           <img
@@ -41,11 +41,117 @@
               placeholder="Create your password"
             />
 
-            <button class="create-account" type="submit">Create account</button>
+            <button class="create-account next-page" type="submit">
+              Create account
+            </button>
           </form>
-          <p class="login-link">
-            Already have an account? <a href="#">Login</a>
+          <p class="login-link next-page">
+            Already have an account? <a>Login</a>
           </p>
+        </div>
+      </div>
+    </div>
+    <div class="container page hidden">
+      <div class="slide slide-1">
+        <div class="right-panel">
+          <h1>Login</h1>
+          <form>
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email address"
+            />
+
+            <label for="password">Password</label>
+            <input
+              class="last-input"
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+            />
+
+            <button class="login-btn next-page" type="submit">Login</button>
+          </form>
+          <p class="login-link register-page">
+            Don't already have an account? <a href="#">Register</a>
+          </p>
+        </div>
+        <div class="left-panel">
+          <img
+            class="grid-img"
+            src="../visual/Pickle_repeat.jpg"
+            alt="Description"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="ready-container hidden page">
+      <div>
+        <img
+          class="ready-img"
+          src="../visual/Pickle_green.png"
+          alt="Pickle"
+          class="pickle-icon"
+        />
+      </div>
+      <div class="ready-card">
+        <h1 class="light-h1">Ready to play?</h1>
+        <p class="ready-p">
+          Guess whether each tweet is real or AI-generated!<br />Swipe left for
+          AI, right for Real.
+        </p>
+        <button class="ready-btn next-page">PLAY</button>
+      </div>
+    </div>
+    <div class="game-screen hidden page">
+      <div class="game-score">
+        <div class="score">Score: <span id="score">0</span></div>
+      </div>
+      <div>
+        <h1 class="game-h1">Is this tweet real or AI?</h1>
+      </div>
+      <div class="tweet-card">
+        <div class="tweet-header">
+          <img src="" alt="Profile picture" class="avatar" />
+          <div class="tweet-user">
+            <strong class="tweet-name">Ryan Renolds</strong><br />
+            <span class="handle">@ryanrenolds</span>
+          </div>
+        </div>
+        <div class="tweet-content">
+          I had spaghetti and it was very nice i enjoyed it
+        </div>
+      </div>
+
+      <div class="choice-buttons">
+        <button class="choice-button">← AI</button>
+        <button class="choice-button">Real →</button>
+      </div>
+      <div class="game-answer right hidden">
+        <div>
+          <p class="answer">Correct!</p>
+          <p class="answer-comment">That tweet was real</p>
+        </div>
+        <div>
+          <img
+            src="Visual/Pickle_green.png"
+            alt="Correct-pickle"
+            class="answer-pickle"
+          />
+        </div>
+      </div>
+      <div class="game-answer wrong">
+        <div>
+          <p class="answer">Wrong!</p>
+          <p class="answer-comment">That tweet was AI</p>
+        </div>
+        <div>
+          <img
+            src="Visual/Red_pickle.png"
+            alt="Correct-pickle"
+            class="answer-pickle"
+          />
         </div>
       </div>
     </div>

@@ -182,6 +182,7 @@ button:hover {
   text-underline-offset: 3px;
   text-decoration-style: solid;
   text-decoration-skip-ink: none;
+  cursor: pointer;
 }
 
 /********************/
@@ -257,6 +258,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .game-score {
