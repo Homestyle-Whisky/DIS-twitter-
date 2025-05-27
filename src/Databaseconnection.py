@@ -47,7 +47,7 @@ user_signup("jonasg300@gmail.com", "jonashahah", "batman123")
 
 
 
-def get_tweet_attributes(tweet_id: str): 
+def get_tweet_attributes(tweet_id: str):    
     response = (supabase.table("tweet_data")
                 .select("name", "tweet", "is_real", "image_url")
                 .eq("Tweet_ID", tweet_id)
