@@ -68,7 +68,7 @@ print(get_tweet_attributes("1"))
 ## Generate the username for the tweet
 def tweet_username(tweet_id: str):
     response = (supabase.table("tweet_data")
-                .select("name", "tweet", "is_real", "image_url")
+                .select("name")
                 .eq("Tweet_ID", tweet_id)
                 .execute()
     )
