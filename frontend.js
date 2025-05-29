@@ -16,16 +16,11 @@ async function fetchData() {
     return tweet_data;
   }
 }
+
 async function main(tweet_num) {
   const tweets = await fetchData(); // <-- Waits for the promise to resolve
   return tweets[tweet_num]; // Access the first element of the array
 }
-
-async function getTweetCount() {
-  const tweets = await fetchData();
-  return tweets.length;
-}
-console.log(getTweetCount());
 
 function createCard() {
   for (let i = 0; i < 10; i++) {

@@ -3,7 +3,7 @@ function wait(ms) {
 }
 
 async function setupPageNavigation() {
-  await wait(2000); // Wait 2 seconds before doing anything
+  await wait(1000); // Wait 2 seconds before doing anything
 
   const nextPage = document.querySelectorAll(".next-page");
   const allPages = document.querySelectorAll(".page");
