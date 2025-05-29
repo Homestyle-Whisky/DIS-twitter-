@@ -16,6 +16,9 @@ async function setupPageNavigation() {
   const rightAI = document.querySelectorAll(".right-ai");
   const wrongReal = document.querySelectorAll(".wrong-real");
   const rightReal = document.querySelectorAll(".right-real");
+  const score = document.getElementById("score");
+  const gameScore = document.querySelector(".game-score");
+  const playBtn = document.querySelector(".ready-btn ");
 
   console.log(answerAI);
   console.log(answerReal);
@@ -27,6 +30,7 @@ async function setupPageNavigation() {
   console.log(rightReal);
 
   let currentPageIndex = 0;
+  let timeAnswered = 0;
 
   nextPage.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -37,22 +41,36 @@ async function setupPageNavigation() {
 
       // Move to next page
       currentPageIndex = (currentPageIndex + 1) % allPages.length;
+      timeAnswered = 0;
 
       // Show next page
       allPages[currentPageIndex].classList.remove("hidden");
     });
   });
 
+  playBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    gameScore.classList.remove("hidden");
+  });
+
   let currentTweet = 0;
+  let currentScore = 0;
 
   answerAI.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent form submission or link behavior
-
-      if (button.classList.contains("false")) {
-        console.log("Hello");
-        rightAI[currentTweet].classList.remove("hidden");
-        nextTweet[currentTweet].classList.remove("hidden");
+      if (timeAnswered == 0) {
+        if (button.classList.contains("false")) {
+          rightAI[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+          currentScore = currentScore + 1;
+          score.innerHTML = `${currentScore}`;
+        } else {
+          wrongReal[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+        }
+        currentTweet = (currentTweet + 1) % allTweet.length;
+        timeAnswered = 1;
       }
     });
   });
@@ -60,8 +78,18 @@ async function setupPageNavigation() {
   answerReal.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent form submission or link behavior
-      if (button.classList.contains("false")) {
-        console.log("Wrong It was AI");
+      if (timeAnswered == 0) {
+        if (button.classList.contains("false")) {
+          wrongAI[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+        } else {
+          rightReal[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+          currentScore = currentScore + 1;
+          score.innerHTML = `${currentScore}`;
+        }
+        currentTweet = (currentTweet + 1) % allTweet.length;
+        timeAnswered = 1;
       }
     });
   });

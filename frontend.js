@@ -33,9 +33,6 @@ function createCard() {
       let valid = tweet.is_real;
       const htmlString = `
       <div class="game-screen hidden page">
-  <div class="game-score">
-    <div class="score">Score: <span id="score">0</span></div>
-  </div>
   <div>
     <h1 class="game-h1">Is this tweet real or AI?</h1>
   </div>
@@ -75,7 +72,7 @@ function createCard() {
     </div>
     <div>
       <img
-        src="Visual/Pickle_green.png"
+        src="Visual/Red_pickle.png"
         alt="Correct-pickle"
         class="answer-pickle"
       />
@@ -101,15 +98,15 @@ function createCard() {
       </div>
       <div>
         <img
-          src="Visual/Red_pickle.png"
-          alt="Correct-pickle"
-          class="answer-pickle"
+         src="Visual/Pickle_green.png"
+        alt="Correct-pickle"
+        class="answer-pickle"
         />
       </div>
     </div>
 
     <div class="game-next-slide">
-      <div class="score next-tweet hidden">Next tweet</div>
+      <div class="score next-tweet next-page hidden">Next tweet</div>
     </div>
 </div>
       `;
