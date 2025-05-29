@@ -256,7 +256,7 @@ button:hover {
   color: #c7ef4e;
   font-family: Neuton;
   margin: 0;
-  padding: 40px 20px;
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -343,7 +343,7 @@ button:hover {
 
 .game-h1 {
   color: var(--Pickle2, #c7ef4e);
-  margin-top: 100px;
+  margin-top: 140px;
 }
 
 .tweet-card {
@@ -422,15 +422,17 @@ button:hover {
 /********************/
 /* End screen */
 /********************/
-.end-screen {
-  margin: 0;
-  background-color: #cbd2cb; /* soft greyish background */
+.overlay {
+  position: absolute;
+  height: 101vh;
+  width: 100vw;
+  z-index: 999;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* soft greyish background */
   font-family: Neuton;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  position: relative;
 }
 
 .end-card {

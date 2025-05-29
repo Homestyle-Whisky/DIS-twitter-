@@ -23,7 +23,7 @@ async function main(tweet_num) {
 }
 
 function createCard() {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 4; i++) {
     const randomNumber = Math.floor(Math.random() * 120) + 1;
     main(randomNumber).then((tweet) => {
       let name = tweet.name;
