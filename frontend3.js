@@ -32,7 +32,7 @@ function createCard() {
       let username = tweet.username;
       let valid = tweet.is_real;
       const htmlString = `
-      <div class="game-screen hidden page">
+      <div class="game-screen hidden page tweet-screen">
   <div>
     <h1 class="game-h1">Is this tweet real or AI?</h1>
   </div>
@@ -106,7 +106,7 @@ function createCard() {
     </div>
 
     <div class="game-next-slide">
-      <div class="score next-tweet next-page hidden">Next tweet</div>
+      <div class="score next-tweet hidden">Next tweet</div>
     </div>
 </div>
       `;
@@ -148,40 +148,44 @@ function wait(ms) {
 
 async function setupPageNavigation() {
   await wait(1000); // Wait 1 seconds before doing anything
-  const allTweet = document.querySelectorAll(".next-tweet");
-  const answerAI = document.querySelectorAll(".answer-ai");
-  const answerReal = document.querySelectorAll(".answer-real");
-  const wrongAI = document.querySelectorAll(".wrong-ai");
-  const rightAI = document.querySelectorAll(".right-ai");
-  const wrongReal = document.querySelectorAll(".wrong-real");
-  const rightReal = document.querySelectorAll(".right-real");
-  const score = document.getElementById("score");
-  const finalScore = document.querySelector(".final-score");
-  const endScreen = document.querySelector(".end-screen");
-  const gameScore = document.querySelector(".game-score");
-  const playBtn = document.querySelector(".ready-btn");
-  const restartBtn = document.querySelector(".restart-button");
-  const game = document.querySelectorAll(".game-screen");
+  let tweetScreen = document.querySelectorAll(".tweet-screen");
+  let allTweet = document.querySelectorAll(".next-tweet");
+  let answerAI = document.querySelectorAll(".answer-ai");
+  let answerReal = document.querySelectorAll(".answer-real");
+  let wrongAI = document.querySelectorAll(".wrong-ai");
+  let rightAI = document.querySelectorAll(".right-ai");
+  let wrongReal = document.querySelectorAll(".wrong-real");
+  let rightReal = document.querySelectorAll(".right-real");
+  let score = document.getElementById("score");
+  let finalScore = document.querySelector(".final-score");
+  let endScreen = document.querySelector(".end-screen");
+  let gameScore = document.querySelector(".game-score");
+  let playBtn = document.querySelector(".ready-btn");
+  let game = document.querySelectorAll(".game-screen");
 
-  let currentPageIndex = 0;
   let timeAnswered = 0;
 
-  nextPage[allPages.length].innerHTML = `End game!`;
+  let currentTweet = 0;
+  let currentScore = 0;
 
-  nextPage.forEach((button) => {
+  allTweet[tweetScreen.length - 1].innerHTML = `End game!`;
+
+  console.log(allTweet);
+
+  allTweet.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent form submission or link behavior
 
-      if (currentPageIndex < allPages.length - 1) {
+      if (currentTweet < allTweet.length - 1) {
         // Hide current page
-        allPages[currentPageIndex].classList.add("hidden");
+        tweetScreen[currentTweet].classList.add("hidden");
 
         // Move to next page
-        currentPageIndex = currentPageIndex + 1;
+        currentTweet = currentTweet + 1;
         timeAnswered = 0;
 
         // Show next page
-        allPages[currentPageIndex].classList.remove("hidden");
+        tweetScreen[currentTweet].classList.remove("hidden");
       } else {
         finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
         endScreen.classList.remove("hidden");
@@ -193,9 +197,6 @@ async function setupPageNavigation() {
     event.preventDefault();
     gameScore.classList.remove("hidden");
   });
-
-  let currentTweet = 0;
-  let currentScore = 0;
 
   answerAI.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -210,7 +211,6 @@ async function setupPageNavigation() {
           wrongReal[currentTweet].classList.remove("hidden");
           allTweet[currentTweet].classList.remove("hidden");
         }
-        currentTweet = currentTweet + 1;
         timeAnswered = 1;
       }
     });
@@ -229,31 +229,58 @@ async function setupPageNavigation() {
           currentScore = currentScore + 1;
           score.innerHTML = `${currentScore}`;
         }
-        currentTweet = (currentTweet + 1) % allTweet.length;
         timeAnswered = 1;
       }
-    });
-  });
-
-  restartBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    allPages[currentPageIndex].classList.add("hidden");
-    currentPageIndex = 2;
-    allPages[currentPageIndex].classList.remove("hidden");
-    endScreen.classList.add("hidden");
-    currentScore = 0;
-    score.innerHTML = `${currentScore}`;
-    gameScore.classList.add("hidden");
-    finalScore.innerHTML = `${currentScore}`;
-
-    game.forEach((g) => {
-      g.remove();
     });
   });
 }
 
 const playbtn = document.querySelector(".ready-btn");
+async function playgame() {
+  createCard();
+  await wait(1000);
+  let readyscreen = document.querySelector(".ready-container");
+  let gamescreen = document.querySelector(".game-screen");
+  let gameScore = document.querySelector(".game-score");
+
+  readyscreen.classList.add("hidden");
+  gamescreen.classList.remove("hidden");
+
+  gameScore.classList.remove("hidden");
+
+  setupPageNavigation();
+}
+
 playbtn.addEventListener("click", (event) => {
   event.preventDefault();
-  createCard();
+  playgame();
+});
+
+let restartBtn = document.querySelector(".restart-button");
+
+function restart() {
+  let allPages = document.querySelectorAll(".page");
+  let score = document.getElementById("score");
+  let finalScore = document.querySelector(".final-score");
+  let endScreen = document.querySelector(".end-screen");
+  let gameScore = document.querySelector(".game-score");
+  let game = document.querySelectorAll(".game-screen");
+  let tweetScreen = document.querySelectorAll(".tweet-screen");
+
+  tweetScreen[tweetScreen.length - 1].classList.add("hidden");
+  allPages[2].classList.remove("hidden");
+  endScreen.classList.add("hidden");
+  let currentScore = 0;
+  score.innerHTML = `${currentScore}`;
+  gameScore.classList.add("hidden");
+  finalScore.innerHTML = `${currentScore}`;
+
+  game.forEach((g) => {
+    g.remove();
+  });
+}
+
+restartBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  restart();
 });

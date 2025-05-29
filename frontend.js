@@ -32,7 +32,7 @@ function createCard() {
       let username = tweet.username;
       let valid = tweet.is_real;
       const htmlString = `
-      <div class="game-screen hidden page">
+      <div class="game-screen hidden tweet-screen">
   <div>
     <h1 class="game-h1">Is this tweet real or AI?</h1>
   </div>
@@ -147,33 +147,29 @@ function createCard() {
 //   );
 // }
 
-
-
-
-
 // Function to handle the "PLAY" button click
-document.querySelector('.ready-btn').addEventListener('click', async () => {
+document.querySelector(".ready-btn").addEventListener("click", async () => {
   try {
-      const response = await fetch('http://localhost:5000/start_game', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              // You can send additional data here if needed
-          }),
-      });
+    const response = await fetch("http://localhost:5000/start_game", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // You can send additional data here if needed
+      }),
+    });
 
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
 
-      const data = await response.json();
-      console.log('Game started with ID:', data.game_id);
-      // Redirect to the game page or update the UI as needed
-      window.location.href = 'game.html'; // Change to your game page URL
+    const data = await response.json();
+    console.log("Game started with ID:", data.game_id);
+    // Redirect to the game page or update the UI as needed
+    window.location.href = "game.html"; // Change to your game page URL
   } catch (error) {
-      console.error('Error starting game:', error);
+    console.error("Error starting game:", error);
   }
 });
 
