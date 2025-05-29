@@ -282,7 +282,7 @@ button:hover {
 .game-answer {
   position: absolute;
   bottom: 44px;
-  right: 77px;
+  left: 77px;
   width: 260px;
   height: 81px;
   flex-shrink: 0;
@@ -292,6 +292,21 @@ button:hover {
   justify-content: center;
   align-items: center;
   gap: 18px;
+}
+
+.game-next-slide {
+  position: absolute;
+  bottom: 44px;
+  right: 77px;
+  cursor: pointer;
+}
+
+.game-next-slide:hover {
+  position: absolute;
+  bottom: 44px;
+  right: 77px;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .answer {
