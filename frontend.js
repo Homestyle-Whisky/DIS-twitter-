@@ -118,8 +118,6 @@ function createCard() {
   }
 }
 
-createCard();
-
 // // Function to send guess to Flask backend
 // async function sendGuess(user_id, tweet_id, user_answer, correct_answer) {
 //   const response = await fetch("http://localhost:5000/submit_guess", {

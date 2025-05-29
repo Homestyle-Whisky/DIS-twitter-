@@ -6,8 +6,8 @@ async function setupPageNavigation() {
   await wait(1000); // Wait 1 seconds before doing anything
 
   const nextPage = document.querySelectorAll(".next-page");
-  const allTweet = document.querySelectorAll(".next-tweet");
   const allPages = document.querySelectorAll(".page");
+  const allTweet = document.querySelectorAll(".next-tweet");
   const answerAI = document.querySelectorAll(".answer-ai");
   const answerReal = document.querySelectorAll(".answer-real");
   const wrongAI = document.querySelectorAll(".wrong-ai");
@@ -18,7 +18,9 @@ async function setupPageNavigation() {
   const finalScore = document.querySelector(".final-score");
   const endScreen = document.querySelector(".end-screen");
   const gameScore = document.querySelector(".game-score");
-  const playBtn = document.querySelector(".ready-btn ");
+  const playBtn = document.querySelector(".ready-btn");
+  const restartBtn = document.querySelector(".restart-button");
+  const game = document.querySelectorAll(".game-screen");
 
   let currentPageIndex = 0;
   let timeAnswered = 0;
@@ -40,7 +42,7 @@ async function setupPageNavigation() {
         // Show next page
         allPages[currentPageIndex].classList.remove("hidden");
       } else {
-        finalScore.innerHTML = `Score: <strong>${currentScore}</strong>;`;
+        finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
         endScreen.classList.remove("hidden");
       }
     });
@@ -57,7 +59,6 @@ async function setupPageNavigation() {
   answerAI.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent form submission or link behavior
-      console.log(currentTweet);
       if (timeAnswered == 0) {
         if (button.classList.contains("false")) {
           rightAI[currentTweet].classList.remove("hidden");
@@ -77,7 +78,6 @@ async function setupPageNavigation() {
   answerReal.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent form submission or link behavior
-      console.log(currentTweet);
       if (timeAnswered == 0) {
         if (button.classList.contains("false")) {
           wrongAI[currentTweet].classList.remove("hidden");
@@ -93,7 +93,22 @@ async function setupPageNavigation() {
       }
     });
   });
-  console.log(allTweet.length);
+
+  restartBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    allPages[currentPageIndex].classList.add("hidden");
+    currentPageIndex = 2;
+    allPages[currentPageIndex].classList.remove("hidden");
+    endScreen.classList.add("hidden");
+    currentScore = 0;
+    score.innerHTML = `${currentScore}`;
+    gameScore.classList.add("hidden");
+    finalScore.innerHTML = `${currentScore}`;
+
+    game.forEach((g) => {
+      g.remove();
+    });
+  });
 }
 
 setupPageNavigation();
