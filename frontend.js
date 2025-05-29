@@ -93,6 +93,7 @@ function createCard() {
         class="answer-pickle"
       />
     </div>
+    </div>
     <div class="game-answer right-ai hidden">
       <div>
         <p class="answer">Correct!</p>
@@ -107,10 +108,9 @@ function createCard() {
       </div>
     </div>
 
-    <div class="game-next-slide hidden">
-      <div class="score next-page">Next tweet</div>
+    <div class="game-next-slide">
+      <div class="score next-tweet hidden">Next tweet</div>
     </div>
-  </div>
 </div>
       `;
 
