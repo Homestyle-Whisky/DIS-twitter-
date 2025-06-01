@@ -274,6 +274,14 @@ function restart() {
   finalScore.innerHTML = `0`;
 }
 
+const playAgain = document.querySelector(".play-again");
+const lbPage = document.querySelector(".leaderboard-page");
+playAgain.addEventListener("click", (e) => {
+  e.preventDefault();
+  lbPage.classList.add("hidden");
+  restart();
+});
+
 // Wait for DOM to load before hooking up events
 document.addEventListener("DOMContentLoaded", () => {
   const playBtn = document.querySelector(".ready-btn");

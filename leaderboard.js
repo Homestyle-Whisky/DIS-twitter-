@@ -88,19 +88,30 @@ function createLeaderboard() {
 
 const checklb = document.querySelector(".check-leaderboard");
 const lbPage = document.querySelector(".leaderboard-page");
-lbPage.addEventListener("click", (e) => {
+
+checklb.addEventListener("click", (e) => {
   e.preventDefault();
-  const lbHTML = ` <div
-  class="leaderboard-column leader-board-rang grid-left white-background"
-></div>
-<div
-  class="leaderboard-column leader-board-name white-background"
-></div>
-<div
-  class="leaderboard-column leader-board-score white-background"
-></div>`;
-  const lb = document.querySelector(".leaderBoard");
-  lb.insertAdjacentElement("beforeend", `${lbHTML}`);
+  const lbHTML = `
+  <div class="leaderboard-column leader-board-rang grid-left white-background"></div>
+  <div class="leaderboard-column leader-board-name white-background"></div>
+  <div class="leaderboard-column leader-board-score white-background"></div>
+`;
+  const lb = document.querySelector(".leaderboard");
+  const tweetScreens = document.querySelectorAll(".tweet-screen");
+  const endScreen = document.querySelector(".end-screen");
+  const gameScore = document.querySelector(".game-score");
+
+  tweetScreens.forEach((s) => {
+    if (s.classList.contains("hidden")) {
+      return;
+    } else {
+      s.classList.add("hidden");
+    }
+  });
+
+  endScreen.classList.add("hidden");
+  gameScore.classList.add("hidden");
+  lb.insertAdjacentHTML("beforeend", lbHTML);
   createLeaderboard();
-  lb.classList.remove("hidden");
+  lbPage.classList.remove("hidden");
 });
