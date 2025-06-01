@@ -129,6 +129,29 @@ function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+async function submitFinalScore(score) {
+  const user_id = localStorage.getItem("user_id");
+  const game_id = localStorage.getItem("game_id");
+
+  if (!user_id || !game_id) {
+    console.error("Missing user_id or game_id");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/submit_score", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ user_id, game_id, score }),
+    });
+
+    const result = await response.text();
+    console.log("✅ Score submitted:", result);
+  } catch (error) {
+    console.error("❌ Error submitting score:", error);
+  }
+}
+
 async function setupPageNavigation() {
   await wait(1000);
 
@@ -166,6 +189,7 @@ async function setupPageNavigation() {
       } else {
         finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
         endScreen.classList.remove("hidden");
+        submitFinalScore(currentScore); //  Her sendes scoren
       }
     });
   });

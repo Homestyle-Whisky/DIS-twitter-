@@ -118,7 +118,7 @@ async function setupPageNavigation() {
       } else {
         finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
         endScreen.classList.remove("hidden");
-        submitFinalScore(currentScore); // 🔥 Her sendes scoren
+        submitFinalScore(currentScore); //  Her sendes scoren
       }
     });
   });
