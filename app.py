@@ -3,8 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 from supabase import create_client, AuthApiError
-
-
+import re 
 from Databaseconnection import user_signup, user_login, supabase
 from supabase import create_client, Client
 from dotenv import load_dotenv
@@ -42,7 +41,13 @@ def signup():
         payload.get("password"),
         payload.get("name")
     )
+    
+    email  = payload.get("email")
+    
+    pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|io|gov)$"
 
+    if not re.match(pattern,email): 
+        return jsonify({"error": "please enter valid email"}), 400 
     if err:
         # 400 = client-side problem (bad data, duplicate, etc.)
         return jsonify({ "error": err }), 400
@@ -59,7 +64,14 @@ def handle_all_exceptions(e):
 @app.route("/login", methods = ["POST"])
 def login(): 
     data = request.get_json(force = True) or {}
+
+    email  = data.get("email")
     
+    pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|io|gov)$"
+
+    if not re.match(pattern,email): 
+        return jsonify({"error": "please enter valid email"}), 400 
+
     err, login_data= user_login(
          data.get("email"),
          data.get("password"),
