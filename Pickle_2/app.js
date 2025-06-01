@@ -67,6 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const email    = document.getElementById("email").value;
   const name     = document.getElementById("name").value;
   const password = document.getElementById("password").value;
+  
+  // Email regex check
+  const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|io|gov)$/;
+  if (!emailPattern.test(email)) {
+    alert("error please enter a valid email address");
+    return; 
+    // <— exit early: never hit fetch() if invalid
+  }
 
   try {
     const res = await fetch("http://127.0.0.1:5000/signup", {
@@ -97,6 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const email = document.getElementById("login-email").value; 
     const password = document.getElementById("login-password").value; 
+
+    // Email regex check
+    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|io|gov)$/;
+    if (!emailPattern.test(email)) {
+    alert("error please enter a valid email address");
+    return; 
+    // <— exit early: never hit fetch() if invalid
+    }
 
     const res = await fetch("http://127.0.0.1:5000/login", {
       method: "POST",
