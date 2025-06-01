@@ -22,7 +22,7 @@
         </div>
         <div class="right-panel">
           <h1>Create account</h1>
-          <form id = "createAccount">
+          <form id="createAccount">
             <label for="email">Email Address</label>
             <input
               type="email"
@@ -100,7 +100,7 @@
           Guess whether each tweet is real or AI-generated!<br />Swipe left for
           AI, right for Real.
         </p>
-        <button class="ready-btn next-page">PLAY</button>
+        <button class="ready-btn">PLAY</button>
       </div>
     </div>
     <div class="game-screen hidden page">
@@ -155,6 +155,20 @@
       </div>
     </div>
     <script src="Pickle_2/app.js"></script>
+    <div class="game-score hidden">
+      <div class="score">Score: <span id="score">0</span></div>
+    </div>
+    <div class="end-screen overlay hidden">
+      <div class="end-card">
+        <h2>Feeling sour?</h2>
+        <h1 class="stroke-heading">There are no more tweets<br />available</h1>
+        <p class="small-text">You’ve completed them all…..</p>
+        <p class="final-score">Score: <strong>86</strong></p>
+        <button class="restart-button">RESTART</button>
+      </div>
+    </div>
+    <script type="module" src="frontend3.js"></script>
+    <!-- <script type="module" src="frontend2.js"></script> -->
   </body>
 </html>
 

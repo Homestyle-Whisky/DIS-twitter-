@@ -6,14 +6,25 @@ from supabase import create_client, AuthApiError
 
 
 from Databaseconnection import user_signup, user_login, supabase
+from supabase import create_client, Client
+from dotenv import load_dotenv
+from Databaseconnection import user_signup
+import os
+load_dotenv()
+
+url = os.getenv("SUPABASE_URL")
+key = os.getenv("SUPABASE_KEY")
+
+supabase: Client = create_client(url, key)
+
 
 app = Flask(__name__)
 # Allow all origins / methods / headers
 CORS(
    app,
-   resources={r"/*": {"origins": "*"}},
-   supports_credentials=True,
-  intercept_exceptions=True    # ← now even uncaught exceptions get CORS headers
+    resources={r"/*": {"origins": "*"}},
+    supports_credentials=True,
+    intercept_exceptions=True    # ← now even uncaught exceptions get CORS headers
  )
 
 @app.after_request
@@ -56,6 +67,17 @@ def login():
     if err:
         return jsonify({"error": err}), 401
     return jsonify(login_data), 200
+
+@app.route("/start_game", methods=["POST"])
+def start_game():
+    response = supabase.table("games").insert({
+        "user_id": "f33d2948-6aef-4b67-a2d5-ed9968f3a0d5",
+        "score": 0
+    }).execute()
+
+    game_id = response.data[0]["game_id"]
+    return jsonify({"game_id": game_id})
+
 
 
 if __name__ == "__main__":
