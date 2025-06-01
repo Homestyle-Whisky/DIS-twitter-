@@ -29,32 +29,82 @@ function createCard() {
 
       const htmlString = `
       <div class="game-screen hidden page tweet-screen">
-        <div><h1 class="game-h1">Is this tweet real or AI?</h1></div>
-        <div class="tweet-card">
-          <div class="tweet-header">
-            <img src="${img}" alt="Profile picture" class="avatar" />
-            <div class="tweet-user">
-              <strong class="tweet-name">${name}</strong><br />
-              <span class="handle">${username}</span>
-            </div>
-          </div>
-          <div class="tweet-content">${message}</div>
-        </div>
+  <div>
+    <h1 class="game-h1">Is this tweet real or AI?</h1>
+  </div>
+  <div class="tweet-card">
+    <div class="tweet-header">
+      <img src="${img}" alt="Profile picture" class="avatar" />
+      <div class="tweet-user">
+        <strong class="tweet-name">${name}</strong>
+        <br />
+        <span class="handle">${username}</span>
+      </div>
+    </div>
+    <div class="tweet-content">${message}</div>
+  </div>
 
-        <div class="choice-buttons">
-          <button class="choice-button answer-ai ${valid}">← AI</button>
-          <button class="choice-button answer-real ${valid}">Real →</button>
-        </div>
+  <div class="choice-buttons">
+    <button class="choice-button answer-ai ${valid}">← AI</button>
+    <button class="choice-button answer-real ${valid}">Real →</button>
+  </div>
+  <div class="game-answer right-real hidden">
+    <div>
+      <p class="answer">Correct!</p>
+      <p class="answer-comment">That tweet was real</p>
+    </div>
+    <div>
+      <img
+        src="Visual/Pickle_green.png"
+        alt="Correct-pickle"
+        class="answer-pickle"
+      />
+    </div>
+  </div>
+  <div class="game-answer wrong-real hidden">
+    <div>
+      <p class="answer">Wrong!</p>
+      <p class="answer-comment">That tweet was real</p>
+    </div>
+    <div>
+      <img
+        src="Visual/Red_pickle.png"
+        alt="Correct-pickle"
+        class="answer-pickle"
+      />
+    </div>
+  </div>
+  <div class="game-answer wrong-ai hidden">
+    <div>
+      <p class="answer">Wrong!</p>
+      <p class="answer-comment">That tweet was AI</p>
+    </div>
+    <div>
+      <img
+        src="Visual/Red_pickle.png"
+        alt="Correct-pickle"
+        class="answer-pickle"
+      />
+    </div>
+    </div>
+    <div class="game-answer right-ai hidden">
+      <div>
+        <p class="answer">Correct!</p>
+        <p class="answer-comment">That tweet was AI</p>
+      </div>
+      <div>
+        <img
+         src="Visual/Pickle_green.png"
+        alt="Correct-pickle"
+        class="answer-pickle"
+        />
+      </div>
+    </div>
 
-        <div class="game-answer right-real hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was real</p></div>
-        <div class="game-answer wrong-real hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was real</p></div>
-        <div class="game-answer wrong-ai hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was AI</p></div>
-        <div class="game-answer right-ai hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was AI</p></div>
-
-        <div class="game-next-slide">
-          <div class="score next-tweet hidden">Next tweet</div>
-        </div>
-      </div>`;
+    <div class="game-next-slide">
+      <div class="score next-tweet hidden">Next tweet</div>
+    </div>
+</div>`;
       document.querySelector(".ready-container").insertAdjacentHTML("afterend", htmlString);
     });
   }
