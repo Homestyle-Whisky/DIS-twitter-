@@ -512,15 +512,65 @@ button:hover {
 
 .toggle-eye {
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 22px;
+  top: 39%;
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
+  object-fit: contain;
   cursor: pointer;
 }
 
 .last-input {
   box-sizing: border-box;
   width: 100%;
+}
+
+.password-info-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  cursor: default;
+  line-height: 20px;
+  font-size: 28px;
+  border: 1px solid var(--Pickle-2);
+  padding: 0px 1px 3px 1px;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1;
+  top: 130%; /* below the "?" */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.label-password {
+  display: flex;
+  gap: 8px;
+  z-index: 1;
 }
