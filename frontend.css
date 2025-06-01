@@ -498,3 +498,29 @@ button:hover {
 .hidden {
   display: none;
 }
+
+/********************/
+/* Password show */
+/********************/
+
+.password-wrapper {
+  position: relative;
+  width: 100%; /* or a specific width like 300px */
+  display: flex;
+  align-items: center;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.last-input {
+  box-sizing: border-box;
+  width: 100%;
+}

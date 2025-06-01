@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="frontend.css" />
   </head>
   <body>
-    <div id = "create-account-container" class="container page">
+    <div id="create-account-container" class="container page">
       <div class="slide slide-1">
         <div class="left-panel">
           <img
@@ -22,7 +22,7 @@
         </div>
         <div class="right-panel">
           <h1>Create account</h1>
-          <form id = "createAccount">
+          <form id="createAccount">
             <label for="email">Email Address</label>
             <input
               type="email"
@@ -34,12 +34,21 @@
             <input type="text" id="name" placeholder="Enter your full name" />
 
             <label for="password">Password</label>
-            <input
-              class="last-input"
-              type="password"
-              id="password"
-              placeholder="Create your password"
-            />
+            <div class="password-wrapper">
+              <input
+                class="last-input"
+                type="password"
+                id="password"
+                placeholder="Create your password"
+              />
+              <img
+                src="eye-closed.png"
+                alt="Toggle visibility"
+                id="eyeIcon"
+                class="toggle-eye"
+                onclick="togglePassword()"
+              />
+            </div>
 
             <button class="create-account next-page" type="submit">
               Create account
@@ -51,7 +60,7 @@
         </div>
       </div>
     </div>
-    <div id = "login-container" class="container page hidden">
+    <div id="login-container" class="container page hidden">
       <div class="slide slide-1">
         <div class="right-panel">
           <h1>Login</h1>
@@ -85,7 +94,7 @@
         </div>
       </div>
     </div>
-    <div id = "ready-container" class="ready-container hidden page">
+    <div id="ready-container" class="ready-container hidden page">
       <div>
         <img
           class="ready-img"
@@ -116,6 +125,16 @@
       </div>
     </div>
     <script src="Pickle_2/app.js"></script>
-    <script type="module" src="frontend.js"></script>
+    <script>
+      const passwordInput = document.getElementById("password");
+      const eyeIcon = document.getElementById("eyeIcon");
+
+      function togglePassword() {
+        const isHidden = passwordInput.type === "password";
+        passwordInput.type = isHidden ? "text" : "password";
+        eyeIcon.src = isHidden ? "eye-open.png" : "eye-closed.png";
+      }
+    </script>
+    <script type="module" src="frontend4.js"></script>
   </body>
 </html>
