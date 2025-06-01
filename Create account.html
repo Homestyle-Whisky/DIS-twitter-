@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="frontend.css" />
   </head>
   <body>
-    <div class="container page">
+    <div id = "create-account-container" class="container page">
       <div class="slide slide-1">
         <div class="left-panel">
           <img
@@ -51,11 +51,11 @@
         </div>
       </div>
     </div>
-    <div class="container page hidden">
+    <div id = "login-container" class="container page hidden">
       <div class="slide slide-1">
         <div class="right-panel">
           <h1>Login</h1>
-          <form id="login-form"></form>
+          <form id="login-form">
             <label for="login-email">Email Address</label>
             <input
               type="email"
@@ -70,7 +70,6 @@
               id="login-password"
               placeholder="Enter your password"
             />
-
             <button class="login-btn next-page" type="submit">Login</button>
           </form>
           <p class="login-link register-page">
@@ -86,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div class="ready-container hidden page">
+    <div id = "ready-container" class="ready-container hidden page">
       <div>
         <img
           class="ready-img"
@@ -104,7 +103,6 @@
         <button class="ready-btn next-page">PLAY</button>
       </div>
     </div>
-<<<<<<< HEAD
     <div class="game-screen hidden page">
       <div class="game-score">
         <div class="score">Score: <span id="score">0</span></div>
@@ -157,9 +155,7 @@
       </div>
     </div>
     <script src="Pickle_2/app.js"></script>
-=======
-    <script type="module" src="frontend.js"></script>
-    <script type="module" src="frontend2.js"></script>
->>>>>>> 183740a5c3de4979eb82204d30f7c9f4700fc541
   </body>
 </html>
+
+

@@ -52,41 +52,76 @@ function handleChoice(isRealChosen) {
   setTimeout(loadTweet, 600);
 }
 
+// showSlide helper
+function showSlide(id) {
+  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
+  const slide = document.getElementById(id);
+  if (slide) slide.classList.remove("hidden");
+}
+
 // INIT logic on each page
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("createAccount");
+  signupForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const email    = document.getElementById("email").value;
+  const name     = document.getElementById("name").value;
+  const password = document.getElementById("password").value;
 
-  signupForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  try {
+    const res = await fetch("http://127.0.0.1:5000/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, name, password })
+    });
+    const data = await res.json();
 
-    const email    = document.getElementById("email").value;
-    const name     = document.getElementById("name").value;
-    const password = document.getElementById("password").value;
-
-    try {
-      const res = await fetch("http://127.0.0.1:5000/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name, password })
-      });
-
-      const data = await res.json();
-      console.log("Signup result:", data);
-
-      if (res.ok) {
-        alert("Account created successfully!");
-        window.location.href = "ready.html";
-      } else {
-        alert("Signup failed: " + (data.error || "Unknown error"));
-      }
-
-    } catch (err) {
-      console.error("Signup error:", err);
-      alert("Network or CORS error: " + err.message);
+    if (!res.ok) {
+      return alert("Sign-up failed: " + (data.error || data.details));
     }
 
-  });  // end signupForm listener
-  
+    alert("Account created! Please log in.");
+    showSlide("login-container");
+  } catch (err) {
+    console.error("Signup error:", err);
+    alert("Network or CORS error: " + err.message);
+  }
+});
+
+  // Loginform Listener 
+  const loginForm = document.querySelector("#login-container form");
+  if (!loginForm) {
+    console.error("Could not find the login <form> inside #login-container");
+  } else {
+  loginForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = document.getElementById("login-email").value; 
+    const password = document.getElementById("login-password").value; 
+
+    const res = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({email, password}) 
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      return alert("Login Failed:" + data.error)
+    }
+
+    localStorage.setItem("sb-access-token", data.session.access_token);
+    localStorage.setItem("sb-refresh-token", data.session.refresh_token);
+    showSlide("ready-container");
+  }) 
+  // end Loginform listener 
+
+// login knap funktionalitet
+  const toLoginLink = document.querySelector("#create-account-container .login-link a");
+  toLoginLink.addEventListener("click", e => {
+    e.preventDefault();
+  showSlide("login-container");
+  });
+
+
   // ───── Ready page ─────
   if (page === 'ready.html') {
     document.querySelector('.ready-btn').addEventListener('click', () => {
@@ -131,4 +166,5 @@ document.addEventListener("DOMContentLoaded", () => {
               window.location.href = 'ready.html';
             });
   }
+}
 }); 

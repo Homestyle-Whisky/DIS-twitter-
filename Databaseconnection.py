@@ -1,6 +1,6 @@
 # Databaseconnection.py
 import os
-from supabase import create_client, Client
+from supabase import create_client, Client, AuthApiError
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,61 +9,76 @@ supabase: Client = create_client(
     os.getenv("SUPABASE_KEY")
 )
 
-def user_signup(email: str, password: str, name: str) -> dict:
-    # 1) Try to sign up the user in Auth; this will raise on error
+def user_signup(email: str, password: str, name: str):
+    # 1) Sign up with GoTrue
     try:
         auth_resp = supabase.auth.sign_up({
             "email":    email,
             "password": password,
-            "options":  {"data": {"username": name}},
         })
+    except AuthApiError as e:
+        return str(e), None
+
+    user = auth_resp.user
+    if user is None:
+        return "Please check your email for the confirmation link.", None
+
+    # 2) Insert into your Postgres "users" table
+    try:
+        insert_resp = (
+            supabase
+            .table("users")
+            .insert({
+                "id":    user.id,
+                "email": user.email,
+                "username":  name,
+                "password": password
+            })
+            .execute()
+        )
     except Exception as e:
-        # turn any raised exception into a JSON-friendly error dict
-        return {"error": str(e)}
+        # this will catch whatever the Postgrest client threw
+        return str(e), None
 
-    # 2) Pull the user object off the response
-    user = getattr(auth_resp, "user", None)
-    if not user or not getattr(user, "id", None):
-        return {"error": "Sign-up succeeded but no user returned."}
+    # 3) Check for logical errors (e.g. unique‐constraint violation surfaced in .error)
+    if getattr(insert_resp, "error", None):
+        return insert_resp.error.message, None
 
-    print(user)
-    print(name)
-    
-    # 3) Persist to your own `users` table
-    insert = (
-        supabase
-          .table("users")
-          .insert({
-            "id":    user.id,
-            "mail": user.email,
-            "username":  name,
-            "password": password
-          })
-          .execute()    
-    )
+    # 4) Success
+    return None, insert_resp.data[0]
 
-    # 4) Return the normal user payload
-    return {
-        "user": {
-            "id":    user.id,
-            "mail": user.email,
-            "username":  name,
-            "password": password
-        }
-    }
 
 def user_login(email,password): 
-    response = supabase.auth.sign_in_with_password(
-    {
-        "mail": email, 
+    credentials = {
+        "email": email, 
         "password": password,
     }
-    )
-    return response 
-
-
-
-
+    try:
+        auth = supabase.auth.sign_in_with_password({
+            "email":    email,
+            "password": password,
+        })
+    except AuthApiError as e:
+        return str(e), None
+    
+    session = auth.session
+    user    = auth.user
+    if session is None or user is None:
+        return "Invalid email or password.", None
+    
+    return None, {
+        "session": {
+            "access_token":  session.access_token,
+            "refresh_token": session.refresh_token,
+            "expires_at":    session.expires_at,
+            # add any other primitive fields you need
+        },
+        "user": {
+            "id":    user.id,
+            "email": user.email,
+            # user.user_metadata or similar if you stored extra metadata
+        }
+    }
 
 
 def get_tweet_attributes(tweet_id: str): 

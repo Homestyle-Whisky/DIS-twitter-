@@ -1,8 +1,11 @@
 # app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
+from supabase import create_client, AuthApiError
 
-from Databaseconnection import user_signup
+
+from Databaseconnection import user_signup, user_login, supabase
 
 app = Flask(__name__)
 # Allow all origins / methods / headers
@@ -21,37 +24,39 @@ def add_cors_headers(response):
     return response
 
 @app.route("/signup", methods=["POST"])
-def signup_route():
-    data = request.get_json(force=True)
-    if not data:
-        return jsonify({"error": "Invalid JSON body"}), 400
-
-    result = user_signup(
-        email=data.get("email"),
-        password=data.get("password"),
-        name=data.get("name"),
+def signup():
+    payload = request.get_json(force=True)
+    err, user = user_signup(
+        payload.get("email"),
+        payload.get("password"),
+        payload.get("name")
     )
 
-    # If our helper returned an error key, bubble it up
-    if "error" in result:
-        return jsonify(result), 400
+    if err:
+        # 400 = client-side problem (bad data, duplicate, etc.)
+        return jsonify({ "error": err }), 400
 
-    return jsonify(result), 201
+    # 201 = resource created successfully
+    return jsonify(user), 201
 
 @app.errorhandler(Exception)
 def handle_all_exceptions(e):
-    # Build a JSON response instead of the HTML debug page
-    resp = jsonify({
-        "error":   "Internal server error",
-        "details": str(e)
-    })
+    resp = jsonify({ "error": "Internal server error", "details": str(e) })
     resp.status_code = 500
-
-    # Force the same CORS headers
-    resp.headers["Access-Control-Allow-Origin"]  = "*"
-    resp.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
-    resp.headers["Access-Control-Allow-Headers"] = "Content-Type"
     return resp
+
+@app.route("/login", methods = ["POST"])
+def login(): 
+    data = request.get_json(force = True) or {}
+    
+    err, login_data= user_login(
+         data.get("email"),
+         data.get("password"),
+    )
+    if err:
+        return jsonify({"error": err}), 401
+    return jsonify(login_data), 200
+
 
 if __name__ == "__main__":
     # host="0.0.0.0" lets other machines on the LAN (or your Live-Server) reach it
