@@ -99,5 +99,5 @@ def start_game():
 
 
 if __name__ == "__main__":
-    # host="0.0.0.0" lets other machines on the LAN (or your Live-Server) reach it
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
