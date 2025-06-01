@@ -584,3 +584,72 @@ button:hover {
 .margin-bottom-14 {
   margin-bottom: 14px;
 }
+
+/********************/
+/* Leaderboard */
+/********************/
+
+.leaderboard,
+.leaderboard-h {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+.grey-line {
+  border-bottom: 1px solid #d9d9d9;
+  width: 100%;
+}
+
+h3 {
+  font-family: "Neuton", serif;
+  color: #085420;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  margin: 16px 0;
+}
+
+.white-background {
+  background-color: #fff;
+}
+
+.grey-background {
+  background-color: #d9d9d9;
+}
+
+.padding-left {
+  padding-left: 20px;
+}
+
+.leaderboard-column {
+  width: 100%;
+}
+
+.play-again-btn {
+  right: 77px;
+  position: absolute;
+  bottom: 44px;
+  cursor: pointer;
+}
+
+.play-again:hover {
+  text-decoration: underline;
+}
+
+.leaderboard-card {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  max-width: 660px;
+  width: 100%;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.margin-bottom-8 {
+  margin-bottom: 8px;
+}
