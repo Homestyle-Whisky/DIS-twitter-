@@ -121,7 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
   showSlide("login-container");
   });
 
-
+  // register knap funktionalitet
+  const toRegisterLink = document.querySelector(".login-link.register-page a");
+  if (toRegisterLink){
+  toRegisterLink.addEventListener("click", e => {
+    e.preventDefault();
+  showSlide("create-account-container");
+  });
+  }
   // ───── Ready page ─────
   if (page === 'ready.html') {
     document.querySelector('.ready-btn').addEventListener('click', () => {
