@@ -134,6 +134,13 @@ async function setupPageNavigation() {
   let timeAnswered = 0;
 
   nextBtns[tweetScreens.length - 1].innerText = `End game!`;
+  // nextBtns[tweetScreens.length - 1].classList.add("end-game");
+  // const endgame = document.querySelector(".end-game");
+
+  // endgame.addEventListener("click", () => {
+  //   currentScore
+  // });
+
 
   nextBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
