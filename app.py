@@ -26,6 +26,11 @@ CORS(
     intercept_exceptions=True    # ← now even uncaught exceptions get CORS headers
  )
 
+@app.route("/")
+def home():
+    return {"message": "Backend is running successfully!"}
+
+
 @app.after_request
 def add_cors_headers(response):
     response.headers["Access-Control-Allow-Origin"]  = "*"
