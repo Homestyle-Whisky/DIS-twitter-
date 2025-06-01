@@ -6,7 +6,9 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function fetchData() {
-  const { data: tweet_data, error } = await supabase.from("tweet_data").select("*");
+  const { data: tweet_data, error } = await supabase
+    .from("tweet_data")
+    .select("*");
   if (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -20,14 +22,25 @@ async function main(tweet_num) {
 }
 
 function createCard() {
+  let tempListTweet = [];
   for (let i = 0; i < 4; i++) {
     const randomNumber = Math.floor(Math.random() * 120);
-    main(randomNumber).then((tweet) => {
-      if (!tweet) return;
+    if (tempListTweet.includes(randomNumber)) {
+      return (i = i - 1);
+    } else {
+      tempListTweet.push(randomNumber);
+      main(randomNumber).then((tweet) => {
+        if (!tweet) return;
 
-      let { name, tweet: message, image_url: img, username, is_real: valid } = tweet;
+        let {
+          name,
+          tweet: message,
+          image_url: img,
+          username,
+          is_real: valid,
+        } = tweet;
 
-      const htmlString = `
+        const htmlString = `
       <div class="game-screen hidden page tweet-screen">
         <div><h1 class="game-h1">Is this tweet real or AI?</h1></div>
         <div class="tweet-card">
@@ -50,13 +63,15 @@ function createCard() {
         <div class="game-answer wrong-real hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was real</p></div>
         <div class="game-answer wrong-ai hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was AI</p></div>
         <div class="game-answer right-ai hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was AI</p></div>
-
         <div class="game-next-slide">
           <div class="score next-tweet hidden">Next tweet</div>
         </div>
       </div>`;
-      document.querySelector(".ready-container").insertAdjacentHTML("afterend", htmlString);
-    });
+        document
+          .querySelector(".ready-container")
+          .insertAdjacentHTML("afterend", htmlString);
+      });
+    }
   }
 }
 
@@ -84,6 +99,12 @@ async function setupPageNavigation() {
   let timeAnswered = 0;
 
   nextBtns[tweetScreens.length - 1].innerText = `End game!`;
+  nextBtns[tweetScreens.length - 1].classList.add("end-game");
+  const endgame = document.querySelector(".end-game");
+
+  endgame.addEventListener("click", () => {
+    currentScore;
+  });
 
   nextBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
