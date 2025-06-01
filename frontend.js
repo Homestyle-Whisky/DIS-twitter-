@@ -113,15 +113,10 @@ function createCard() {
         />
       </div>
     </div>
-
-        <div class="game-answer right-real hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was real</p></div>
-        <div class="game-answer wrong-real hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was real</p></div>
-        <div class="game-answer wrong-ai hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was AI</p></div>
-        <div class="game-answer right-ai hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was AI</p></div>
-        <div class="game-next-slide">
+    <div class="game-next-slide">
           <div class="score next-tweet hidden">Next tweet</div>
         </div>
-      </div>`;
+    </div>`;
         document
           .querySelector(".ready-container")
           .insertAdjacentHTML("afterend", htmlString);
