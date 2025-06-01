@@ -36,18 +36,21 @@ def add_cors_headers(response):
 @app.route("/signup", methods=["POST"])
 def signup():
     payload = request.get_json(force=True)
-    err, user = user_signup(
-        payload.get("email"),
-        payload.get("password"),
-        payload.get("name")
-    )
-    
+
     email  = payload.get("email")
     
     pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|io|gov)$"
 
     if not re.match(pattern,email): 
         return jsonify({"error": "please enter valid email"}), 400 
+    
+    err, user = user_signup(
+        payload.get("email"),
+        payload.get("password"),
+        payload.get("name")
+    )
+
+    
     if err:
         # 400 = client-side problem (bad data, duplicate, etc.)
         return jsonify({ "error": err }), 400
