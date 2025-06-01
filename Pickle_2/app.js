@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("sb-access-token", data.session.access_token);
     localStorage.setItem("sb-refresh-token", data.session.refresh_token);
+    localStorage.setItem("user_id", data.user.id);
     showSlide("ready-container");
   }) 
   // end Loginform listener 

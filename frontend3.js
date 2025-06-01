@@ -6,9 +6,7 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function fetchData() {
-  const { data: tweet_data, error } = await supabase
-    .from("tweet_data")
-    .select("*");
+  const { data: tweet_data, error } = await supabase.from("tweet_data").select("*");
   if (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -22,116 +20,71 @@ async function main(tweet_num) {
 }
 
 function createCard() {
-  let tempListTweet = [];
   for (let i = 0; i < 4; i++) {
     const randomNumber = Math.floor(Math.random() * 120);
-    if (tempListTweet.includes(randomNumber)) {
-      return (i = i - 1);
-    } else {
-      tempListTweet.push(randomNumber);
-      main(randomNumber).then((tweet) => {
-        if (!tweet) return;
+    main(randomNumber).then((tweet) => {
+      if (!tweet) return;
 
-        let {
-          name,
-          tweet: message,
-          image_url: img,
-          username,
-          is_real: valid,
-        } = tweet;
+      let { name, tweet: message, image_url: img, username, is_real: valid } = tweet;
 
-        const htmlString = `
+      const htmlString = `
       <div class="game-screen hidden page tweet-screen">
-  <div>
-    <h1 class="game-h1">Is this tweet real or AI?</h1>
-  </div>
-  <div class="tweet-card">
-    <div class="tweet-header">
-      <img src="${img}" alt="Profile picture" class="avatar" />
-      <div class="tweet-user">
-        <strong class="tweet-name">${name}</strong>
-        <br />
-        <span class="handle">${username}</span>
-      </div>
-    </div>
-    <div class="tweet-content">${message}</div>
-  </div>
+        <div><h1 class="game-h1">Is this tweet real or AI?</h1></div>
+        <div class="tweet-card">
+          <div class="tweet-header">
+            <img src="${img}" alt="Profile picture" class="avatar" />
+            <div class="tweet-user">
+              <strong class="tweet-name">${name}</strong><br />
+              <span class="handle">${username}</span>
+            </div>
+          </div>
+          <div class="tweet-content">${message}</div>
+        </div>
 
-  <div class="choice-buttons">
-    <button class="choice-button answer-ai ${valid}">← AI</button>
-    <button class="choice-button answer-real ${valid}">Real →</button>
-  </div>
-  <div class="game-answer right-real hidden">
-    <div>
-      <p class="answer">Correct!</p>
-      <p class="answer-comment">That tweet was real</p>
-    </div>
-    <div>
-      <img
-        src="Visual/Pickle_green.png"
-        alt="Correct-pickle"
-        class="answer-pickle"
-      />
-    </div>
-  </div>
-  <div class="game-answer wrong-real hidden">
-    <div>
-      <p class="answer">Wrong!</p>
-      <p class="answer-comment">That tweet was real</p>
-    </div>
-    <div>
-      <img
-        src="Visual/Red_pickle.png"
-        alt="Correct-pickle"
-        class="answer-pickle"
-      />
-    </div>
-  </div>
-  <div class="game-answer wrong-ai hidden">
-    <div>
-      <p class="answer">Wrong!</p>
-      <p class="answer-comment">That tweet was AI</p>
-    </div>
-    <div>
-      <img
-        src="Visual/Red_pickle.png"
-        alt="Correct-pickle"
-        class="answer-pickle"
-      />
-    </div>
-    </div>
-    <div class="game-answer right-ai hidden">
-      <div>
-        <p class="answer">Correct!</p>
-        <p class="answer-comment">That tweet was AI</p>
-      </div>
-      <div>
-        <img
-         src="Visual/Pickle_green.png"
-        alt="Correct-pickle"
-        class="answer-pickle"
-        />
-      </div>
-    </div>
+        <div class="choice-buttons">
+          <button class="choice-button answer-ai ${valid}">← AI</button>
+          <button class="choice-button answer-real ${valid}">Real →</button>
+        </div>
 
         <div class="game-answer right-real hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was real</p></div>
         <div class="game-answer wrong-real hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was real</p></div>
         <div class="game-answer wrong-ai hidden"><p class="answer">Wrong!</p><p class="answer-comment">That tweet was AI</p></div>
         <div class="game-answer right-ai hidden"><p class="answer">Correct!</p><p class="answer-comment">That tweet was AI</p></div>
+
         <div class="game-next-slide">
           <div class="score next-tweet hidden">Next tweet</div>
         </div>
       </div>`;
-        document
-          .querySelector(".ready-container")
-          .insertAdjacentHTML("afterend", htmlString);
-      });
-    }
+      document.querySelector(".ready-container").insertAdjacentHTML("afterend", htmlString);
+    });
   }
 }
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function submitFinalScore(score) {
+  const user_id = localStorage.getItem("user_id");
+  const game_id = localStorage.getItem("game_id");
+
+  if (!user_id || !game_id) {
+    console.error("Missing user_id or game_id");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/submit_score", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ user_id, game_id, score }),
+    });
+
+    const result = await response.text();
+    console.log("✅ Score submitted:", result);
+  } catch (error) {
+    console.error("❌ Error submitting score:", error);
+  }
 }
 
 async function setupPageNavigation() {
@@ -154,12 +107,6 @@ async function setupPageNavigation() {
   let timeAnswered = 0;
 
   nextBtns[tweetScreens.length - 1].innerText = `End game!`;
-  nextBtns[tweetScreens.length - 1].classList.add("end-game");
-  const endgame = document.querySelector(".end-game");
-
-  endgame.addEventListener("click", () => {
-    currentScore;
-  });
 
   nextBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
@@ -171,6 +118,7 @@ async function setupPageNavigation() {
       } else {
         finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
         endScreen.classList.remove("hidden");
+        submitFinalScore(currentScore); // 🔥 Her sendes scoren
       }
     });
   });
@@ -255,7 +203,8 @@ function restart() {
   finalScore.innerHTML = `0`;
 }
 
-// Wait for DOM to load before hooking up events
+// Init
+
 document.addEventListener("DOMContentLoaded", () => {
   const playBtn = document.querySelector(".ready-btn");
   const restartBtn = document.querySelector(".restart-button");
@@ -270,7 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
     restart();
   });
 
-  // Login form setup
   const loginForm = document.getElementById("login-form");
   loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
