@@ -101,7 +101,24 @@ def start_game():
     game_id = response.data[0]["game_id"]
     return jsonify({"game_id": game_id})
 
+@app.route("/submit_score", methods=["POST"])
+def submit_score():
+    user_id = request.form["user_id"]
+    game_id = request.form["game_id"]
+    score = request.form["score"]
 
+    print("✅ Score indsendt!")
+    print("user_id:", user_id)
+    print("game_id:", game_id)
+    print("score:", score)
+
+    response = supabase.table("games").update({
+        "score": int(score)
+    }).eq("game_id", game_id).eq("user_id", user_id).execute()
+
+    print("🧾 Supabase response:", response)
+
+    return "Score submitted successfully"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
