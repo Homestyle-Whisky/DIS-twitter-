@@ -475,13 +475,15 @@ button:hover {
   margin-bottom: 30px;
 }
 
-.restart-button {
+.restart-button,
+.check-leaderboard {
   background-color: var(--Pickle-1);
   color: var(--Pickle-2);
   font-family: "Neuton", serif;
   font-size: 1.2em;
   font-weight: bold;
-  padding: 15px 40px;
+  width: 200px;
+  height: 56px;
   border: none;
   border-radius: 999px;
   cursor: pointer;
@@ -490,6 +492,12 @@ button:hover {
 
 .restart-button:hover {
   background-color: #b9e537;
+}
+
+.flex-restart-leaderboard {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
 }
 
 /********************/
