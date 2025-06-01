@@ -32,7 +32,7 @@ function createCard() {
       let username = tweet.username;
       let valid = tweet.is_real;
       const htmlString = `
-      <div class="game-screen hidden tweet-screen">
+      <div class="game-screen hidden page tweet-screen">
   <div>
     <h1 class="game-h1">Is this tweet real or AI?</h1>
   </div>
@@ -106,7 +106,7 @@ function createCard() {
     </div>
 
     <div class="game-next-slide">
-      <div class="score next-tweet next-page hidden">Next tweet</div>
+      <div class="score next-tweet hidden">Next tweet</div>
     </div>
 </div>
       `;
@@ -118,60 +118,171 @@ function createCard() {
   }
 }
 
-// // Function to send guess to Flask backend
-// async function sendGuess(user_id, tweet_id, user_answer, correct_answer) {
-//   const response = await fetch("http://localhost:5000/submit_guess", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       user_id: user_id,
-//       tweet_id: tweet_id,
-//       user_answer: user_answer,
-//       correct_answer: correct_answer,
-//     }),
+// function first3slides() {
+//   let nextPage = document.querySelectorAll(".next-page");
+//   let allPages = document.querySelectorAll(".page");
+
+//   let currentPageIndex = 0;
+//   let timeAnswered = 0;
+//   nextPage.forEach((button) => {
+//     button.addEventListener("click", (event) => {
+//       event.preventDefault(); // Prevent form submission or link behavior
+//       // Hide current page
+//       allPages[currentPageIndex].classList.add("hidden");
+
+//       // Move to next page
+//       currentPageIndex = currentPageIndex + 1;
+//       timeAnswered = 0;
+
+//       // Show next page
+//       allPages[currentPageIndex].classList.remove("hidden");
+//     });
 //   });
-
-//   const result = await response.json();
-//   console.log("Flask-svar:", result);
 // }
 
-// // Testfunktion kaldet af knappen
-// function testGuess() {
-//   sendGuess(
-//     "075db9a5-1b1f-40ed-aa07-e5f37ccedc5c", // user_id
-//     42, // tweet_id
-//     true, // user_answer
-//     false // correct_answer
-//   );
-// }
+// first3slides();
 
-// Function to handle the "PLAY" button click
-document.querySelector(".ready-btn").addEventListener("click", async () => {
-  try {
-    const userId = "your_user_id_here"; // Replace with the actual user ID
-    const response = await fetch("http://localhost:5000/start_game", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: userId, // Include user_id in the request body
-      }),
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function setupPageNavigation() {
+  await wait(1000); // Wait 1 seconds before doing anything
+  let tweetScreen = document.querySelectorAll(".tweet-screen");
+  let allTweet = document.querySelectorAll(".next-tweet");
+  let answerAI = document.querySelectorAll(".answer-ai");
+  let answerReal = document.querySelectorAll(".answer-real");
+  let wrongAI = document.querySelectorAll(".wrong-ai");
+  let rightAI = document.querySelectorAll(".right-ai");
+  let wrongReal = document.querySelectorAll(".wrong-real");
+  let rightReal = document.querySelectorAll(".right-real");
+  let score = document.getElementById("score");
+  let finalScore = document.querySelector(".final-score");
+  let endScreen = document.querySelector(".end-screen");
+  let gameScore = document.querySelector(".game-score");
+  let playBtn = document.querySelector(".ready-btn");
+  let game = document.querySelectorAll(".game-screen");
+
+  let timeAnswered = 0;
+
+  let currentTweet = 0;
+  let currentScore = 0;
+
+  allTweet[tweetScreen.length - 1].innerHTML = `End game!`;
+
+  console.log(allTweet);
+
+  allTweet.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent form submission or link behavior
+
+      if (currentTweet < allTweet.length - 1) {
+        // Hide current page
+        tweetScreen[currentTweet].classList.add("hidden");
+
+        // Move to next page
+        currentTweet = currentTweet + 1;
+        timeAnswered = 0;
+
+        // Show next page
+        tweetScreen[currentTweet].classList.remove("hidden");
+      } else {
+        finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
+        endScreen.classList.remove("hidden");
+      }
     });
+  });
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
+  playBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    gameScore.classList.remove("hidden");
+  });
 
-    const data = await response.json();
-    console.log("Game started with ID:", data.game_id);
-    // Redirect to the game page or update the UI as needed
-    window.location.href = "game.html"; // Change to your game page URL
-  } catch (error) {
-    console.error("Error starting game:", error);
-  }
+  answerAI.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent form submission or link behavior
+      if (timeAnswered == 0) {
+        if (button.classList.contains("false")) {
+          rightAI[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+          currentScore = currentScore + 1;
+          score.innerHTML = `${currentScore}`;
+        } else {
+          wrongReal[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+        }
+        timeAnswered = 1;
+      }
+    });
+  });
+
+  answerReal.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent form submission or link behavior
+      if (timeAnswered == 0) {
+        if (button.classList.contains("false")) {
+          wrongAI[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+        } else {
+          rightReal[currentTweet].classList.remove("hidden");
+          allTweet[currentTweet].classList.remove("hidden");
+          currentScore = currentScore + 1;
+          score.innerHTML = `${currentScore}`;
+        }
+        timeAnswered = 1;
+      }
+    });
+  });
+}
+
+const playbtn = document.querySelector(".ready-btn");
+async function playgame() {
+  createCard();
+  await wait(1000);
+  let readyscreen = document.querySelector(".ready-container");
+  let gamescreen = document.querySelector(".game-screen");
+  let gameScore = document.querySelector(".game-score");
+
+  readyscreen.classList.add("hidden");
+  gamescreen.classList.remove("hidden");
+
+  gameScore.classList.remove("hidden");
+
+  setupPageNavigation();
+}
+
+playbtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  playgame();
 });
 
-// Existing functions...
+let restartBtn = document.querySelector(".restart-button");
+
+function restart() {
+  let allPages = document.querySelectorAll(".page");
+  let score = document.getElementById("score");
+  let finalScore = document.querySelector(".final-score");
+  let endScreen = document.querySelector(".end-screen");
+  let gameScore = document.querySelector(".game-score");
+  let game = document.querySelectorAll(".game-screen");
+  let tweetScreen = document.querySelectorAll(".tweet-screen");
+
+  tweetScreen[tweetScreen.length - 1].classList.add("hidden");
+  allPages[2].classList.remove("hidden");
+  endScreen.classList.add("hidden");
+  let currentScore = 0;
+  score.innerHTML = `${currentScore}`;
+  gameScore.classList.add("hidden");
+  finalScore.innerHTML = `${currentScore}`;
+
+  game.forEach((g) => {
+    g.remove();
+  });
+}
+
+restartBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  restart();
+});
+
+
