@@ -22,7 +22,7 @@
         </div>
         <div class="right-panel">
           <h1>Create account</h1>
-          <form id="createAccount">
+          <form id = "createAccount">
             <label for="email">Email Address</label>
             <input
               type="email"
@@ -73,7 +73,7 @@
             <button class="login-btn next-page" type="submit">Login</button>
           </form>
           <p class="login-link register-page">
-            Don't already have an account? <a href="#">Register</a>
+            Don't already have an account? <a>Register</a>
           </p>
         </div>
         <div class="left-panel">
@@ -100,61 +100,9 @@
           Guess whether each tweet is real or AI-generated!<br />Swipe left for
           AI, right for Real.
         </p>
-        <button class="ready-btn">PLAY</button>
+        <button class="ready-btn next-page">PLAY</button>
       </div>
     </div>
-    <div class="game-screen hidden page">
-      <div class="game-score">
-        <div class="score">Score: <span id="score">0</span></div>
-      </div>
-      <div>
-        <h1 class="game-h1">Is this tweet real or AI?</h1>
-      </div>
-      <div class="tweet-card">
-        <div class="tweet-header">
-          <img src="" alt="Profile picture" class="avatar" />
-          <div class="tweet-user">
-            <strong class="tweet-name">Ryan Renolds</strong><br />
-            <span class="handle">@ryanrenolds</span>
-          </div>
-        </div>
-        <div class="tweet-content">
-          I had spaghetti and it was very nice i enjoyed it
-        </div>
-      </div>
-
-      <div class="choice-buttons">
-        <button class="choice-button">← AI</button>
-        <button class="choice-button">Real →</button>
-      </div>
-      <div class="game-answer right hidden">
-        <div>
-          <p class="answer">Correct!</p>
-          <p class="answer-comment">That tweet was real</p>
-        </div>
-        <div>
-          <img
-            src="Visual/Pickle_green.png"
-            alt="Correct-pickle"
-            class="answer-pickle"
-          />
-        </div>
-      </div>
-      <div class="game-answer wrong">
-        <div>
-          <p class="answer">Wrong!</p>
-          <p class="answer-comment">That tweet was AI</p>
-        </div>
-        <div>
-          <img
-            src="Visual/Red_pickle.png"
-            alt="Correct-pickle"
-            class="answer-pickle"
-          />
-        </div>
-      </div>
-    </div>
-    <script src="Pickle_2/app.js"></script>
     <div class="game-score hidden">
       <div class="score">Score: <span id="score">0</span></div>
     </div>
@@ -167,9 +115,7 @@
         <button class="restart-button">RESTART</button>
       </div>
     </div>
-    <script type="module" src="frontend3.js"></script>
-    <!-- <script type="module" src="frontend2.js"></script> -->
+    <script src="Pickle_2/app.js"></script>
+    <script type="module" src="frontend.js"></script>
   </body>
 </html>
-
-
