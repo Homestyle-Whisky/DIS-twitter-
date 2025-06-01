@@ -512,11 +512,12 @@ button:hover {
 
 .toggle-eye {
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 22px;
+  top: 39%;
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
+  object-fit: contain;
   cursor: pointer;
 }
 

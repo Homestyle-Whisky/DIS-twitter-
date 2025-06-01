@@ -36,16 +36,16 @@
             <label for="password">Password</label>
             <div class="password-wrapper">
               <input
-                class="last-input"
+                class="last-input password-field"
                 type="password"
                 id="password"
                 placeholder="Create your password"
               />
               <img
-                src="eye-closed.png"
+                src="Visual/Hide_icon.png"
                 alt="Toggle visibility"
                 id="eyeIcon"
-                class="toggle-eye"
+                class="toggle-eye eye-icon"
                 onclick="togglePassword()"
               />
             </div>
@@ -73,12 +73,21 @@
             />
 
             <label for="login-password">Password</label>
-            <input
-              class="last-input"
-              type="password"
-              id="login-password"
-              placeholder="Enter your password"
-            />
+            <div class="password-wrapper">
+              <input
+                class="last-input password-field"
+                type="password"
+                id="password"
+                placeholder="Create your password"
+              />
+              <img
+                src="Visual/Hide_icon.png"
+                alt="Toggle visibility"
+                id="eyeIcon"
+                class="toggle-eye eye-icon"
+                onclick="togglePassword()"
+              />
+            </div>
             <button class="login-btn next-page" type="submit">Login</button>
           </form>
           <p class="login-link register-page">
@@ -126,14 +135,16 @@
     </div>
     <script src="Pickle_2/app.js"></script>
     <script>
-      const passwordInput = document.getElementById("password");
-      const eyeIcon = document.getElementById("eyeIcon");
+      document.querySelectorAll(".password-wrapper").forEach((wrapper) => {
+        const input = wrapper.querySelector(".password-field");
+        const icon = wrapper.querySelector(".eye-icon");
 
-      function togglePassword() {
-        const isHidden = passwordInput.type === "password";
-        passwordInput.type = isHidden ? "text" : "password";
-        eyeIcon.src = isHidden ? "eye-open.png" : "eye-closed.png";
-      }
+        icon.addEventListener("click", () => {
+          const isHidden = input.type === "password";
+          input.type = isHidden ? "text" : "password";
+          icon.src = isHidden ? "Visual/show_pw.png" : "Visual/Hide_icon.png";
+        });
+      });
     </script>
     <script type="module" src="frontend4.js"></script>
   </body>
