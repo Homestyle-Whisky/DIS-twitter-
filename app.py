@@ -70,8 +70,11 @@ def login():
 
 @app.route("/start_game", methods=["POST"])
 def start_game():
+    data = request.get_json()  # Get the JSON data from the request
+    user_id = data.get("user_id")  # Extract user_id from the request data
+
     response = supabase.table("games").insert({
-        "user_id": "f33d2948-6aef-4b67-a2d5-ed9968f3a0d5",
+        "user_id": user_id,  # Use the user_id from the request
         "score": 0
     }).execute()
 

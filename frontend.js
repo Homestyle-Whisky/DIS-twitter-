@@ -150,13 +150,14 @@ function createCard() {
 // Function to handle the "PLAY" button click
 document.querySelector(".ready-btn").addEventListener("click", async () => {
   try {
+    const userId = "your_user_id_here"; // Replace with the actual user ID
     const response = await fetch("http://localhost:5000/start_game", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // You can send additional data here if needed
+        user_id: userId, // Include user_id in the request body
       }),
     });
 
