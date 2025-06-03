@@ -278,6 +278,8 @@ const playAgain = document.querySelector(".play-again");
 const lbPage = document.querySelector(".leaderboard-page");
 playAgain.addEventListener("click", (e) => {
   e.preventDefault();
+  const leaderBoard = document.querySelector(".leaderboard");
+  leaderBoard.innerHTML = "";
   lbPage.classList.add("hidden");
   restart();
 });
