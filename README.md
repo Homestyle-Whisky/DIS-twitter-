@@ -47,3 +47,32 @@ Frontend Setup
 - Open index.html directly in your web browser.
 - register an account (don't use real information, for passwords or mails)
 - Play and enjoy 
+
+
+# SQL setup 
+
+CREATE TABLE public.games (
+  game_id integer NOT NULL DEFAULT nextval('games_game_id_seq'::regclass),
+  user_id uuid,
+  score integer DEFAULT 0,
+  CONSTRAINT games_pkey PRIMARY KEY (game_id),
+  CONSTRAINT games_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+CREATE TABLE public.tweet_data (
+  name text,
+  tweet text,
+  is_real boolean,
+  Tweet_ID smallint GENERATED ALWAYS AS IDENTITY NOT NULL UNIQUE CHECK ("Tweet_ID" > 0),
+  image_url text,
+  username text,
+  CONSTRAINT tweet_data_pkey PRIMARY KEY (Tweet_ID)
+);
+CREATE TABLE public.users (
+  id uuid NOT NULL DEFAULT auth.uid(),
+  username text,
+  highscore integer DEFAULT 0,
+  password text,
+  email text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT users_pkey PRIMARY KEY (id)
+);
