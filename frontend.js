@@ -144,8 +144,6 @@ async function submitFinalScore(score) {
   const user_id = localStorage.getItem("user_id");
   const game_id = localStorage.getItem("game_id");
 
-  // console.log(user_id, game_id);
-
   const { data, error } = await supabase
     .from("games") // replace with your actual table name
     .update({ score: score }) // set score to 5
@@ -184,7 +182,6 @@ async function setupPageNavigation() {
   endgame.addEventListener("click", () => {
     submitFinalScore(currentScore); //  Her sendes scoren
     wait(1000);
-    console.log("End game btn was clicked!");
   });
 
   nextBtns.forEach((btn, index) => {
