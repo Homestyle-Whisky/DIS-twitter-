@@ -68,7 +68,7 @@ CREATE TABLE public.tweet_data (
   CONSTRAINT tweet_data_pkey PRIMARY KEY (Tweet_ID)
 );
 CREATE TABLE public.users (
-  id uuid NOT NULL DEFAULT auth.uid(),
+  id uuid NOT NULL DEFAULT auth.uid(), -- Supabase-specific: Links this row to the authenticated user ID
   username text,
   highscore integer DEFAULT 0,
   password text,
