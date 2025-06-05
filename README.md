@@ -11,3 +11,8 @@ A browser-based game where users guess whether a tweet is written by a real pers
 - Score submitted to the backend using Flask
 - All scores stored in a Supabase database
 - Scores are fetched from the database to the leaderboard
+
+# Built With
+- HTML / CSS / JavaScript
+- Flask (Python backend)
+- Supabase (Database + Auth)
