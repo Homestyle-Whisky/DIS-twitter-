@@ -55,15 +55,15 @@ function createLeaderboard(scores) {
   scores.forEach((entry, index) => {
     lbRank.insertAdjacentHTML(
       "beforeend",
-      `<p class="padding-left">${index + 1}</p>`
+      `<p class="padding-left size-20">${index + 1}</p>`
     );
     lbName.insertAdjacentHTML(
       "beforeend",
-      `<p class="padding-left">${entry.username}</p>`
+      `<p class="padding-left size-20">${entry.username}</p>`
     );
     lbScore.insertAdjacentHTML(
       "beforeend",
-      `<p class="padding-left">${entry.score}</p>`
+      `<p class="padding-left size-20">${entry.score}</p>`
     );
   });
 }
