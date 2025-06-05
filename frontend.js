@@ -1,10 +1,20 @@
-// Frontend works
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 const supabaseUrl = "https://gkkyhepijeaykkpukelb.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdra3loZXBpamVheWtrcHVrZWxiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzkwMzYwMiwiZXhwIjoyMDYzNDc5NjAyfQ.7vXzFlMDvqDLLWf2XA-jaz7KhLlN3jrH1Sd-EMe27n8";
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+document.querySelectorAll(".password-wrapper").forEach((wrapper) => {
+  const input = wrapper.querySelector(".password-field");
+  const icon = wrapper.querySelector(".eye-icon");
+
+  icon.addEventListener("click", () => {
+    const isHidden = input.type === "password";
+    input.type = isHidden ? "text" : "password";
+    icon.src = isHidden ? "Visual/show_pw.png" : "Visual/Hide_icon.png";
+  });
+});
 
 async function fetchData() {
   const { data: tweet_data, error } = await supabase

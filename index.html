@@ -173,18 +173,6 @@
       </div>
     </div>
     <script src="app.js"></script>
-    <script>
-      document.querySelectorAll(".password-wrapper").forEach((wrapper) => {
-        const input = wrapper.querySelector(".password-field");
-        const icon = wrapper.querySelector(".eye-icon");
-
-        icon.addEventListener("click", () => {
-          const isHidden = input.type === "password";
-          input.type = isHidden ? "text" : "password";
-          icon.src = isHidden ? "Visual/show_pw.png" : "Visual/Hide_icon.png";
-        });
-      });
-    </script>
     <script type="module" src="frontend.js"></script>
     <script type="module" src="leaderboard.js"></script>
   </body>

@@ -36,8 +36,8 @@ async function getUsernameFromId(user_id) {
   const { data, error } = await supabase
     .from("users")
     .select("username")
-    .eq("id", user_id) // <-- match on ID
-    .single(); // we expect exactly one match
+    .eq("id", user_id)
+    .single();
 
   if (error) {
     console.error(`Error fetching username for user_id ${user_id}:`, error);
@@ -96,6 +96,7 @@ checklb.addEventListener("click", async (e) => {
     .forEach((s) => s.classList.add("hidden"));
   document.querySelector(".end-screen").classList.add("hidden");
   document.querySelector(".game-score").classList.add("hidden");
+  document.querySelector(".ready-container").classList.add("hidden");
 
   // Show leaderboard page
   lbPage.classList.remove("hidden");
