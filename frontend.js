@@ -23,7 +23,7 @@ async function main(tweet_num) {
 
 function createCard() {
   let tempListTweet = [];
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 10; i++) {
     const randomNumber = Math.floor(Math.random() * 120);
     if (tempListTweet.includes(randomNumber)) {
       return (i = i - 1);
@@ -133,22 +133,17 @@ async function submitFinalScore(score) {
   const user_id = localStorage.getItem("user_id");
   const game_id = localStorage.getItem("game_id");
 
-  if (!user_id || !game_id) {
-    console.error("Missing user_id or game_id");
-    return;
-  }
+  // console.log(user_id, game_id);
 
-  try {
-    const response = await fetch("http://localhost:5000/submit_score", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ user_id, game_id, score }),
-    });
+  const { data, error } = await supabase
+    .from("games") // replace with your actual table name
+    .update({ score: score }) // set score to 5
+    .eq("game_id", game_id); // match based on game_id
 
-    const result = await response.text();
-    console.log("✅ Score submitted:", result);
-  } catch (error) {
-    console.error("❌ Error submitting score:", error);
+  if (error) {
+    console.error("Error updating score:", error);
+  } else {
+    console.log("Score updated successfully:", data);
   }
 }
 
@@ -176,7 +171,9 @@ async function setupPageNavigation() {
   const endgame = document.querySelector(".end-game");
 
   endgame.addEventListener("click", () => {
-    currentScore;
+    submitFinalScore(currentScore); //  Her sendes scoren
+    wait(1000);
+    console.log("End game btn was clicked!");
   });
 
   nextBtns.forEach((btn, index) => {
@@ -189,7 +186,6 @@ async function setupPageNavigation() {
       } else {
         finalScore.innerHTML = `Score: <strong>${currentScore}</strong>`;
         endScreen.classList.remove("hidden");
-        submitFinalScore(currentScore); //  Her sendes scoren
       }
     });
   });

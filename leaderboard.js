@@ -5,22 +5,6 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdra3loZXBpamVheWtrcHVrZWxiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzkwMzYwMiwiZXhwIjoyMDYzNDc5NjAyfQ.7vXzFlMDvqDLLWf2XA-jaz7KhLlN3jrH1Sd-EMe27n8";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function fetchData() {
-  const { data: tweet_data, error } = await supabase
-    .from("tweet_data")
-    .select("*");
-  if (error) {
-    console.error("Error fetching data:", error);
-    return [];
-  }
-  return tweet_data;
-}
-
-async function main(tweet_num) {
-  const tweets = await fetchData();
-  return tweets[tweet_num];
-}
-
 async function getTopScores() {
   const { data: topScores, error } = await supabase
     .from("games")
@@ -49,23 +33,16 @@ async function getTopScores() {
 }
 
 async function getUsernameFromId(user_id) {
-  const { data, error } = await supabase
+  const data = await supabase
     .from("users")
     .select("username")
-    .eq("id", user_id) // <-- match on ID
-    .single(); // we expect exactly one match
-
-  if (error) {
-    console.error(`Error fetching username for user_id ${user_id}:`, error);
-    return null;
-  }
+    .eq("id", user_id)
+    .single();
 
   return data.username;
 }
 
-const scores = await getTopScores();
-
-function createLeaderboard() {
+function createLeaderboard(scores) {
   const lbRank = document.querySelector(".leader-board-rang");
   const lbName = document.querySelector(".leader-board-name");
   const lbScore = document.querySelector(".leader-board-score");
@@ -89,29 +66,32 @@ function createLeaderboard() {
 const checklb = document.querySelector(".check-leaderboard");
 const lbPage = document.querySelector(".leaderboard-page");
 
-checklb.addEventListener("click", (e) => {
+checklb.addEventListener("click", async (e) => {
   e.preventDefault();
-  const lbHTML = `
-  <div class="leaderboard-column leader-board-rang grid-left white-background"></div>
-  <div class="leaderboard-column leader-board-name white-background"></div>
-  <div class="leaderboard-column leader-board-score white-background"></div>
-`;
+
+  // Clear previous leaderboard content
   const lb = document.querySelector(".leaderboard");
-  const tweetScreens = document.querySelectorAll(".tweet-screen");
-  const endScreen = document.querySelector(".end-screen");
-  const gameScore = document.querySelector(".game-score");
+  lb.innerHTML = "";
 
-  tweetScreens.forEach((s) => {
-    if (s.classList.contains("hidden")) {
-      return;
-    } else {
-      s.classList.add("hidden");
-    }
-  });
-
-  endScreen.classList.add("hidden");
-  gameScore.classList.add("hidden");
+  // Create leaderboard layout
+  const lbHTML = `
+    <div class="leaderboard-column leader-board-rang grid-left white-background"></div>
+    <div class="leaderboard-column leader-board-name white-background"></div>
+    <div class="leaderboard-column leader-board-score white-background"></div>
+  `;
   lb.insertAdjacentHTML("beforeend", lbHTML);
-  createLeaderboard();
+
+  // Fetch updated scores and create leaderboard
+  const scores = await getTopScores();
+  createLeaderboard(scores);
+
+  // Hide other screens
+  document
+    .querySelectorAll(".tweet-screen")
+    .forEach((s) => s.classList.add("hidden"));
+  document.querySelector(".end-screen").classList.add("hidden");
+  document.querySelector(".game-score").classList.add("hidden");
+
+  // Show leaderboard page
   lbPage.classList.remove("hidden");
 });
