@@ -66,7 +66,6 @@ username text,
 CONSTRAINT tweet_data_pkey PRIMARY KEY (Tweet_ID)
 );
 CREATE TABLE public.users (
-<<<<<<< HEAD
   id uuid NOT NULL DEFAULT auth.uid(), -- Supabase-specific: Links this row to the authenticated user ID
   username text,
   highscore integer DEFAULT 0,
@@ -75,13 +74,3 @@ CREATE TABLE public.users (
   created_at timestamp with time zone DEFAULT now(),
   CONSTRAINT users_pkey PRIMARY KEY (id)
 );
-=======
-id uuid NOT NULL DEFAULT auth.uid(),
-username text,
-highscore integer DEFAULT 0,
-password text,
-email text,
-created_at timestamp with time zone DEFAULT now(),
-CONSTRAINT users_pkey PRIMARY KEY (id)
-);
->>>>>>> aed9e51dbd0c6264eb03d5e9d052df277103fa9c
