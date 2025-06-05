@@ -16,3 +16,34 @@ A browser-based game where users guess whether a tweet is written by a real pers
 - HTML / CSS / JavaScript
 - Flask (Python backend)
 - Supabase (Database + Auth)
+
+# How to Compile and Run the Web-App from Source
+
+Clone the Source
+- Clone or download the source files to your local machine.
+
+Backend Setup
+- Ensure you have Python 3 installed.
+- Navigate to the project directory in your terminal.
+- Install the required Python package:
+    pip install 
+        - flask
+        - flask-cors
+        - supabase
+        - python-dotenv
+        - requests
+- Start the Flask server:
+    python app.py
+
+Frontend Setup
+- Open index.html directly in your web browser.
+    The frontend will connect to 
+    - the Flask backend 
+    - Supabase (through frontend.js using your supabaseUrl and supabaseKey)
+
+
+# How to run and interact with your web-app
+
+- Open index.html directly in your web browser.
+- register an account (don't use real information, for passwords or mails)
+- Play and enjoy 
