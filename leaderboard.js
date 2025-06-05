@@ -33,11 +33,16 @@ async function getTopScores() {
 }
 
 async function getUsernameFromId(user_id) {
-  const data = await supabase
+  const { data, error } = await supabase
     .from("users")
     .select("username")
-    .eq("id", user_id)
-    .single();
+    .eq("id", user_id) // <-- match on ID
+    .single(); // we expect exactly one match
+
+  if (error) {
+    console.error(`Error fetching username for user_id ${user_id}:`, error);
+    return null;
+  }
 
   return data.username;
 }

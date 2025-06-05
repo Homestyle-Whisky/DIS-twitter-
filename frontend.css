@@ -187,6 +187,15 @@ button:hover {
   cursor: pointer;
 }
 
+.create-account-h1 {
+  margin-bottom: 0px;
+}
+
+.warning {
+  margin-top: 5px;
+  margin-bottom: 28px;
+}
+
 /********************/
 /* Ready */
 /********************/
@@ -234,8 +243,6 @@ button:hover {
   letter-spacing: -0.55px;
   opacity: 0.7;
 }
-
-/* 308-85- */
 
 .ready-btn {
   border-radius: 100px;
