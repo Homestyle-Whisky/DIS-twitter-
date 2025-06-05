@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!emailPattern.test(email)) {
       alert("error please enter a valid email address");
       return;
-      // <— exit early: never hit fetch() if invalid
     }
 
     try {
@@ -61,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!emailPattern.test(email)) {
         alert("error please enter a valid email address");
         return;
-        // <— exit early: never hit fetch() if invalid
       }
 
       const res = await fetch("https://dis-twitter.onrender.com/login", {
@@ -79,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("user_id", data.user.id);
       showSlide("ready-container");
     });
-    // end Loginform listener
 
     // login knap funktionalitet
     const toLoginLink = document.querySelector(

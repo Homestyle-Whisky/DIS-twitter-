@@ -145,9 +145,9 @@ async function submitFinalScore(score) {
   const game_id = localStorage.getItem("game_id");
 
   const { data, error } = await supabase
-    .from("games") // replace with your actual table name
-    .update({ score: score }) // set score to 5
-    .eq("game_id", game_id); // match based on game_id
+    .from("games")
+    .update({ score: score })
+    .eq("game_id", game_id);
 
   if (error) {
     console.error("Error updating score:", error);
@@ -180,7 +180,7 @@ async function setupPageNavigation() {
   const endgame = document.querySelector(".end-game");
 
   endgame.addEventListener("click", () => {
-    submitFinalScore(currentScore); //  Her sendes scoren
+    submitFinalScore(currentScore);
     wait(1000);
   });
 
